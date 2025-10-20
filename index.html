@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./scss/main.css" />
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fa-brands fa-apple fs-4 me-2"></i>
+                Nour Ibrahem
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
+                aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse align-items-center" id="navbarTogglerDemo03">
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="fileDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            File
+                        </a>
+                        <ul class="dropdown-menu text-start" aria-labelledby="fileDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-file me-2"></i>Resume</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-folder-open me-2"></i>Projects</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="editDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Edit
+                        </a>
+                        <ul class="dropdown-menu text-start" aria-labelledby="editDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-envelope me-2"></i>Copy Email</a>
+                            </li>
+                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-phone me-2"></i>Copy Phone</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="goDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Go
+                        </a>
+                        <ul class="dropdown-menu text-start" aria-labelledby="goDropdown" style="text-align: left;">
+                            <li><a class="dropdown-item text-start" href="#"><i class="fa-brands fa-github me-2"></i>Githup</a>
+                            </li>
+                            <li><a class="dropdown-item text-start" href="#"><i class="fa-brands fa-linkedin me-2"></i>Linkedin</a>
+                            </li>
+                            <li><a class="dropdown-item text-start" href="#"><i class="fa-solid fa-envelope me-2"></i>Email</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="helpDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Help
+                        </a>
+                        <ul class="dropdown-menu text-start" aria-labelledby="helpDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-circle-question me-2"></i>Show
+                                    Help</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-chalkboard-user me-2"></i>Show
+                                    Tutorial</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Header -->
+    <!-- start Hero Section -->
+    <section class="hero">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="./image/_image.webp" class="d-block w-100" alt="image One">
+                </div>
+                <div class="carousel-item">
+                    <img src="./image/_image (2).webp" class="d-block w-100" alt="image Two ">
+                </div>
+                <div class="carousel-item">
+                    <img src="./image/_image (3).webp" class="d-block w-100" alt="image Three">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Hero Section -->
+    <!-- Bootstrap JS -->
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+
+</html>

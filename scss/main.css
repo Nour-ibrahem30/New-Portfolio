@@ -1,0 +1,44 @@
+@charset "UTF-8";
+/* إخفاء السهم من زر الـ dropdown */
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+/*Global Styles*/
+:root {
+  --color-gray-700: oklch(37.3% .034 259.733);
+}
+
+.dropdown-menu {
+  background-color: #1d2839;
+}
+.dropdown-menu li a {
+  color: white !important;
+}
+.dropdown-menu li a:hover {
+  background-color: color-mix(in oklab, var(--color-gray-700) 50%, transparent);
+}
+
+/* Start Navbar*/
+.navbar.bg-body-tertiary {
+  height: 45px;
+  padding: 5px;
+  background-color: #071934 !important;
+}
+.navbar.bg-body-tertiary a,
+.navbar.bg-body-tertiary li {
+  color: white !important;
+  display: flex;
+  align-items: center;
+}
+
+/* End Navbar*/
+/*Start Hero Section*/
+.hero img {
+  height: 94.4vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/*End Hero Section*//*# sourceMappingURL=main.css.map */
