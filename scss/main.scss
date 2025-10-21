@@ -1,53 +1,163 @@
-/* إخفاء السهم من زر الـ dropdown */
+@charset "UTF-8";
+
+// Variables
+$navbar-height: 45px;
+$navbar-bg: #071934;
+$dropdown-bg: #1d2839;
+$text-white: white;
+$color-gray-700: oklch(37.3% .034 259.733);
+$transition-duration: 0.8s;
+$transition-easing: ease-in-out;
+
+// Mixins
+@mixin full-screen {
+    width: 100%;
+    height: 100%;
+}
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+}
+
+@mixin no-scrollbar {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+@mixin fade-transition {
+    transition: opacity $transition-duration $transition-easing;
+}
+
+// Global Styles
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+html,
+body {
+    height: 100%;
+    @include no-scrollbar;
+}
+
+:root {
+    --color-gray-700: #{$color-gray-700};
+}
+
+// Dropdown Styles
 .dropdown-toggle::after {
     display: none !important;
 }
 
-/*Global Styles*/
-:root {
-    --color-gray-700: oklch(37.3% .034 259.733);
-}
-
 .dropdown-menu {
-    background-color: #1d2839;
+    background-color: $dropdown-bg;
 
     li {
         a {
-            color: white !important;
+            color: $text-white !important;
 
             &:hover {
-                background-color:
-                    color-mix(in oklab, var(--color-gray-700) 50%, transparent);
+                background-color: color-mix(in oklab, $color-gray-700 50%, transparent);
             }
         }
     }
-
 }
 
-/* Start Navbar*/
-.navbar.bg-body-tertiary {
-    height: 45px;
-    padding: 5px;
-    background-color: #071934 !important;
-
-    a,
-    li {
-        color: white !important;
+// Navbar Styles
+.navbar {
+    &.bg-body-tertiary {
+        height: $navbar-height;
+        padding: 5px;
+        background-color: $navbar-bg !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
         display: flex;
+        justify-content: space-between;
         align-items: center;
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        a,
+        li {
+            color: $text-white !important;
+            @include flex-center;
+        }
+
+        .icons {
+            @include flex-center;
+            color: $text-white;
+
+            i {
+                cursor: pointer;
+                transition: color 0.3s ease;
+
+                &:hover {
+                    opacity: 0.8 !important;
+                }
+            }
+
+      .vscode-icon {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: #007ACC !important;
+        
+        &:hover {
+          transform: scale(1.1);
+          color: #4a9eff !important;
+        }
+      }
+        }
     }
 }
 
-/* End Navbar*/
-
-/*Start Hero Section*/
+// Hero Section
 .hero {
-    img {
-        height: 94.4vh;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
+    height: calc(100vh - #{$navbar-height});
+    margin-top: $navbar-height;
+    position: relative;
+    overflow: hidden;
+
+    .carousel {
+        @include full-screen;
+
+        &-inner {
+            @include full-screen;
+        }
+    }
+
+    .carousel-item {
+        @include full-screen;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        @include fade-transition;
+
+        &.active {
+            opacity: 1;
+        }
+
+        img {
+            @include full-screen;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
     }
 }
-
-/*End Hero Section*/
