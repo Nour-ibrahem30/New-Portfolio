@@ -6,8 +6,11 @@ $navbar-bg: #071934;
 $dropdown-bg: #1d2839;
 $text-white: white;
 $color-gray-700: oklch(37.3% .034 259.733);
-$transition-duration: 0.8s;
-$transition-easing: ease-in-out;
+$transition-duration: 0.3s;
+$transition-easing: ease;
+$span-color-one: red;
+$span-color-two: #f0b100;
+$span-color-three: #00c951;
 
 // Mixins
 @mixin full-screen {
@@ -72,6 +75,73 @@ body {
     }
 }
 
+.page-project {
+    width: 800px;
+    height: 600px;
+    position: absolute !important;
+    background-color: #1d1d1f;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.1);
+    transition: $transition-duration $transition-easing;
+    overflow: hidden;
+
+    .parent-span {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 7px;
+        width: 100%;
+        background-color: #1e2939;
+
+        span {
+            cursor: pointer;
+
+            &:first-child {
+                background-color: $span-color-one;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                margin-left: 10px;
+            }
+
+            &:nth-child(2) {
+                background-color: $span-color-two;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+            }
+
+            &:last-child {
+                background-color: $span-color-three;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+            }
+        }
+    }
+
+    .parent-Api {
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        overflow: auto;
+    }
+
+    p {
+        color: white;
+    }
+
+    &.Big-page {
+        width: 900px;
+        height: 600px;
+    }
+
+    &.small-page {
+        width: 400px;
+    }
+}
 // Navbar Styles
 .navbar {
     &.bg-body-tertiary {
