@@ -60,19 +60,47 @@ if (projects) {
             let myData = result.json();
             return myData;
         }).then(fullDate => {
-            let div = document.createElement("div");
+            let parentProject = document.createElement("div");
+            parentProject.classList.add("parent-project");
             for (let i = 0; i < fullDate.length; i++) {
-                let h1 = document.createElement("p");
-                h1.textContent = fullDate[i].name;
-                div.appendChild(h1);
-                console.log(fullDate[i].name);
-                parentDivs.appendChild(div);
+                let divProject = document.createElement("div");
+                divProject.classList.add("div-project");
+                let paragraph = document.createElement("p");
+                let linkClone = document.createElement("a");
+                let livePage = document.createElement("a");
+                livePage.href = `https://nour-ibrahem30.github.io/-/${fullDate[i].name}`;
+                livePage.target = "_blank";
+                paragraph.textContent = fullDate[i].name;
+                linkClone.href = fullDate[i].html_url;
+                linkClone.target = "_blank";
+                linkClone.textContent = "Github";
+                livePage.textContent = "Live Page";
+                divProject.appendChild(paragraph);
+                divProject.appendChild(livePage);
+                divProject.appendChild(linkClone);
+                parentProject.appendChild(divProject);
+                parentDivs.appendChild(parentProject);
             }
             console.log(fullDate);
-            return fullDate;
         }).catch(() => {
             console.log("Var Error");
         });
+    });
+}
+const copyEmail = document.getElementById("copyEmail");
+if (copyEmail) {
+    copyEmail.addEventListener("click", (e) => {
+        e.preventDefault();
+        navigator.clipboard.writeText("nouribrahem207@gmail.com");
+        alert("✅ Email copied to clipboard!");
+    });
+}
+const copyPhone = document.getElementById("copyPhone");
+if (copyPhone) {
+    copyPhone.addEventListener("click", (e) => {
+        e.preventDefault();
+        navigator.clipboard.writeText("01141615397");
+        alert("📞 Phone copied to clipboard!");
     });
 }
 //# sourceMappingURL=main.js.map

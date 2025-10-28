@@ -126,7 +126,28 @@ body {
         width: 100%;
         height: 100%;
         padding: 20px;
-        overflow: auto;
+        overflow: scroll;
+        
+            .parent-project {
+                overflow: hidden;
+                display: grid;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+                justify-content: center;
+                align-items: center;
+        
+                .div-project {
+                    padding: 15px;
+                    width: auto;
+                    height: 250px;
+                    border: 2px solid;
+                    border-radius: 15px;
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: column;
+                }
+            }
     }
 
     p {
@@ -142,6 +163,7 @@ body {
         width: 400px;
     }
 }
+
 // Navbar Styles
 .navbar {
     &.bg-body-tertiary {
@@ -182,16 +204,16 @@ body {
                 }
             }
 
-      .vscode-icon {
-        cursor: pointer;
-        transition: all 0.3s ease;
-        color: #007ACC !important;
-        
-        &:hover {
-          transform: scale(1.1);
-          color: #4a9eff !important;
-        }
-      }
+                                                                                                                                                                                                                                                                                                                                                                                                .vscode-icon {
+                                                                                                                                                                                                                                                                                                                                                                                                    cursor: pointer;
+                                                                                                                                                                                                                                                                                                                                                                                                    transition: all 0.3s ease;
+                                                                                                                                                                                                                                                                                                                                                                                                    color: #007ACC !important;
+                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                    &:hover {
+                                                                                                                                                                                                                                                                                                                                                                                                        transform: scale(1.1);
+                                                                                                                                                                                                                                                                                                                                                                                                        color: #4a9eff !important;
+                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                }
         }
     }
 }
