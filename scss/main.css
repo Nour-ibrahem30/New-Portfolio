@@ -194,4 +194,57 @@ body {
   -o-object-position: center;
      object-position: center;
   display: block;
+}
+.hero .links {
+  width: 395px;
+  height: 75px;
+  margin: auto;
+  padding: 10px;
+  position: relative;
+  top: -90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 17px;
+  background-color: #2b3749;
+}
+.hero .links .icons-links {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+.hero .links .icons-links img,
+.hero .links .icons-links svg {
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  border-radius: 7px;
+  transition: all 0.3s ease;
+}
+.hero .links .icons-links img:hover,
+.hero .links .icons-links svg:hover {
+  transform: scale(1.1);
+}
+.hero .links .icons-links svg {
+  padding: 6px;
+  border-radius: 7px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.hero .links .icons-links svg:nth-child(2) {
+  background-color: #e19e00 !important;
+}
+.hero .links .icons-links svg:nth-child(3) {
+  background-color: #f33a3e !important;
+}
+.hero .links .icons-links svg:nth-child(4), .hero .links .icons-links svg:nth-child(6) {
+  background-color: #3282ff !important;
+}
+.hero .links .icons-links svg:nth-child(5) {
+  background-color: #00db6e !important;
+}
+.hero .links .icons-links svg:hover {
+  transform: scale(1.1);
 }/*# sourceMappingURL=main.css.map */

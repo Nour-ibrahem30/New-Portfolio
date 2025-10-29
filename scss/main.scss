@@ -127,27 +127,27 @@ body {
         height: 100%;
         padding: 20px;
         overflow: scroll;
-        
-            .parent-project {
-                overflow: hidden;
-                display: grid;
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 20px;
+
+        .parent-project {
+            overflow: hidden;
+            display: grid;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+
+            .div-project {
+                padding: 15px;
+                width: auto;
+                height: 250px;
+                border: 2px solid;
+                border-radius: 15px;
+                display: flex;
                 justify-content: center;
-                align-items: center;
-        
-                .div-project {
-                    padding: 15px;
-                    width: auto;
-                    height: 250px;
-                    border: 2px solid;
-                    border-radius: 15px;
-                    display: flex;
-                    justify-content: center;
-                    flex-direction: column;
-                }
+                flex-direction: column;
             }
+        }
     }
 
     p {
@@ -204,16 +204,16 @@ body {
                 }
             }
 
-                                                                                                                                                                                                                                                                                                                                                                                                .vscode-icon {
-                                                                                                                                                                                                                                                                                                                                                                                                    cursor: pointer;
-                                                                                                                                                                                                                                                                                                                                                                                                    transition: all 0.3s ease;
-                                                                                                                                                                                                                                                                                                                                                                                                    color: #007ACC !important;
-                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                    &:hover {
-                                                                                                                                                                                                                                                                                                                                                                                                        transform: scale(1.1);
-                                                                                                                                                                                                                                                                                                                                                                                                        color: #4a9eff !important;
-                                                                                                                                                                                                                                                                                                                                                                                                    }
-                                                                                                                                                                                                                                                                                                                                                                                                }
+            .vscode-icon {
+                cursor: pointer;
+                transition: all 0.3s ease;
+                color: #007ACC !important;
+
+                &:hover {
+                    transform: scale(1.1);
+                    color: #4a9eff !important;
+                }
+            }
         }
     }
 }
@@ -250,6 +250,69 @@ body {
             object-fit: cover;
             object-position: center;
             display: block;
+        }
+    }
+
+    .links {
+        width: 395px;
+        height: 75px;
+        margin: auto;
+        padding: 10px;
+        position: relative;
+        top: -90px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 17px;
+        background-color: #2b3749;
+
+        .icons-links {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            img,
+            svg {
+                height: 50px;
+                width: 50px;
+                cursor: pointer;
+                border-radius: 7px;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+            }
+
+            svg {
+                &:nth-child(2) {
+                    background-color: #e19e00 !important;
+                }
+
+                &:nth-child(3) {
+                    background-color: #f33a3e !important;
+                }
+
+                &:nth-child(4),
+                &:nth-child(6) {
+                    background-color: #3282ff !important;
+                }
+
+                &:nth-child(5) {
+                    background-color: #00db6e !important;
+                }
+
+                padding: 6px;
+                border-radius: 7px;
+                width: 50px;
+                height: 50px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+            }
         }
     }
 }
