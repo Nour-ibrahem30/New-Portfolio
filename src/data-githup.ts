@@ -1,86 +1,103 @@
-/* 
-- Select Element,
-- Add Projects Page Github
-*/
-const textProject = document.getElementById("Projects")?.textContent
-const projects = document.getElementById("Projects");
+window.addEventListener("load", () => {
+    const projects = document.getElementById("Projects");
 
-if (projects) {
+    if (!projects) return;
+
     projects.addEventListener("click", (e) => {
         e.preventDefault();
-        /* Add Page Project For Dom */
+
+        // لو الصفحة مفتوحة بالفعل، ما تكررش
+        if (document.querySelector(".page-project")) return;
+
         const pageProject = document.createElement("div");
-        /* Create Span Element*/
+        pageProject.className = "page-project";
+
+        // أزرار التحكم
         const spanParent = document.createElement("div");
+        spanParent.className = "parent-span";
         for (let i = 0; i < 3; i++) {
-            const spanChild = document.createElement("span");
-            spanChild.classList.add(`child-${i}`);
-            spanParent.appendChild(spanChild);
+            const span = document.createElement("span");
+            span.className = `child-${i}`;
+            spanParent.appendChild(span);
         }
-        spanParent.classList.add("parent-span");
-        pageProject.classList.add("page-project");
-        pageProject.appendChild(spanParent);
+
+        // القسم الرئيسي للمشاريع
+        const parentApi = document.createElement("div");
+        parentApi.className = "parent-Api";
+
+        // بحث
+        const search = document.createElement("input");
+        search.className = "projects-search";
+        search.placeholder = "Search projects...";
+        parentApi.appendChild(search);
+
+        // قائمة المشاريع
+        const parentProject = document.createElement("div");
+        parentProject.className = "parent-project";
+        parentApi.appendChild(parentProject);
+
+        pageProject.append(spanParent, parentApi);
         document.body.appendChild(pageProject);
-        const spanExit = spanParent.querySelector(".child-0") as HTMLSpanElement;
-        const spanSmallPage = spanParent.querySelector(".child-1") as HTMLSpanElement;
-        const spanBigPage = spanParent.querySelector(".child-2") as HTMLSpanElement;
-        spanExit.addEventListener("click", (event) => {
-            event.stopPropagation();
+
+        const [exitBtn, smallBtn, bigBtn] = spanParent.querySelectorAll("span");
+
+        exitBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
             pageProject.remove();
         });
-        spanSmallPage.addEventListener("click", () => {
-            if (pageProject.classList.contains("small-page")) {
-                pageProject.classList.remove("small-page");
-            } else {
-                pageProject.classList.add("small-page");
-            }
+
+        smallBtn.addEventListener("click", () => {
+            pageProject.classList.toggle("small-page");
         });
-        spanBigPage.addEventListener("click", () => {
-            if (pageProject.classList.contains("Big-page")) {
-                pageProject.classList.remove("Big-page");
-            } else {
-                pageProject.classList.add("Big-page");
-            }
+
+        bigBtn.addEventListener("click", () => {
+            pageProject.classList.toggle("Big-page");
         });
-        /* Create Div For Add Api Project*/
-        const parentDivs = document.createElement("div")
-        parentDivs.classList.add("parent-Api")
-        /* Append Child For Page Project*/
-        pageProject.appendChild(parentDivs)
-        /* Create Div Project*/
+
+        // جلب المشاريع من GitHub
         fetch("https://api.github.com/users/Nour-ibrahem30/repos")
-            .then((result) => {
-                let myData = result.json()
-                return myData
-            }).then(fullDate => {
-                let parentProject = document.createElement("div") as HTMLElement;
-                parentProject.classList.add("parent-project");
-                for (let i = 0; i < fullDate.length; i++) {
-                    /* Create Div Project*/
-                    let divProject = document.createElement("div") as HTMLElement;
-                    divProject.classList.add("div-project");
-                    /* Select Items*/
-                    let paragraph = document.createElement("p") as HTMLParagraphElement;
-                    let linkClone = document.createElement("a") as HTMLAnchorElement;
-                    let livePage = document.createElement("a") as HTMLAnchorElement;
-                    livePage.href = `https://nour-ibrahem30.github.io/-/${fullDate[i].name}`;
-                    livePage.target = "_blank";
-                    /* Add Text To Items*/
-                    paragraph.textContent = fullDate[i].name;
-                    linkClone.href = fullDate[i].html_url;
-                    linkClone.target = "_blank";
-                    linkClone.textContent = "Github";
-                    livePage.textContent = "Live Page";
-                    /* Append Items To Parent Project*/
-                    divProject.appendChild(paragraph);
-                    divProject.appendChild(livePage);
-                    divProject.appendChild(linkClone);
-                    parentProject.appendChild(divProject);
-                    parentDivs.appendChild(parentProject);
-                }
-                console.log(fullDate);
-            }).catch(() => {
-                console.log("Var Error");
+            .then((res) => res.json())
+            .then((repos) => {
+                repos.forEach((repo: any) => {
+                    const div = document.createElement("div");
+                    div.className = "div-project";
+
+                    const name = document.createElement("p");
+                    name.textContent = repo.name;
+
+                    const live = document.createElement("a");
+                    live.href = `https://nour-ibrahem30.github.io/-/${repo.name}`;
+                    live.target = "_blank";
+                    live.textContent = "Live Page";
+
+                    const git = document.createElement("a");
+                    git.href = repo.html_url;
+                    git.target = "_blank";
+                    git.textContent = "Github";
+
+                    const download = document.createElement("a");
+                    download.href = `https://github.com/Nour-ibrahem30/${repo.name}/archive/refs/heads/${repo.default_branch}.zip`;
+                    download.textContent = "Download ZIP";
+                    download.target = "_blank";
+
+                    div.append(name, live, git, download);
+                    parentProject.appendChild(div);
+                });
             })
+            .catch(() => {
+                const err = document.createElement("p");
+                err.textContent = "Error loading projects.";
+                parentProject.appendChild(err);
+            });
+
+        search.addEventListener("input", () => {
+            const q = search.value.toLowerCase();
+            const cards = parentProject.querySelectorAll(".div-project");
+
+            cards.forEach((card) => {
+                const name = card.querySelector("p")?.textContent?.toLowerCase() || "";
+                (card as HTMLElement).style.display = name.includes(q) ? "block" : "none";
+            });
+        });
     });
-}
+});
