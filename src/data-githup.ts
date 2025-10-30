@@ -106,11 +106,9 @@ function openProjectsOverlay() {
                 const img = document.createElement("img");
                 img.loading = "lazy";
                 img.alt = `${repo.name} preview image`;
-                // لقطـة شاشة مباشرة من صفحة الـ Live عبر Microlink
                 const liveUrl = `https://nour-ibrahem30.github.io/${repo.name}/`;
                 const microlink = `https://api.microlink.io/?url=${encodeURIComponent(liveUrl)}&screenshot=true&meta=false&embed=screenshot.url`;
                 img.src = microlink;
-                // عند الفشل: جرّب صورة من README/الملفات الشائعة، ثم أفاتار المالك
                 img.onerror = async () => {
                     try {
                         const realUrl = await getRepoImageUrl(repo);
@@ -172,7 +170,6 @@ window.addEventListener("load", () => {
         });
     }
 
-    // احتياطياً: تفويض عام للنقر في حال فشل التقاط العنصر مباشرة
     document.addEventListener("click", (e) => {
         const target = e.target as HTMLElement | null;
         const trigger = target?.closest?.("#Projects");
