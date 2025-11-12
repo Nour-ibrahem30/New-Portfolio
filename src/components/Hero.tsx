@@ -4,6 +4,8 @@ import Projects from './Projects'
 
 const Hero = () => {
   const [activeModal, setActiveModal] = useState<string | null>(null)
+  const [currentSection, setCurrentSection] = useState<string>('main')
+  const [previousSection, setPreviousSection] = useState<string>('main')
 
   useEffect(() => {
     // Bootstrap carousel يعمل تلقائياً من خلال data-bs-ride="carousel"
@@ -15,6 +17,17 @@ const Hero = () => {
 
   const closeModal = () => {
     setActiveModal(null)
+  }
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    const glow = e.currentTarget.querySelector('.mouse-glow') as HTMLElement
+    if (glow) {
+      glow.style.left = `${x}px`
+      glow.style.top = `${y}px`
+    }
   }
 
   return (
@@ -51,7 +64,7 @@ const Hero = () => {
           <div className="links">
             <div className="icons-links">
               <img src="/assets/icons/github-6980894_640.webp" alt="github" 
-                   className="github-icon svg-one" onClick={() => openModal('projects')} />
+                   className="github-icon svg-one" onClick={() => openModal('projects')} title='Github projects' />
 
               <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 16 16"
                    className="text-white svg-two" height="35" width="35" onClick={() => openModal('files')}>
@@ -65,11 +78,6 @@ const Hero = () => {
               </svg>
 
               <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 16 16"
-                   className="text-white svg-four" height="30" width="30" onClick={() => openModal('calendar')}>
-                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"></path>
-              </svg>
-
-              <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 16 16"
                    className="text-white svg-five" height="35" width="35" onClick={() => openModal('spotify')}>
                 <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.669 11.538a.5.5 0 0 1-.686.165c-1.879-1.147-4.243-1.407-7.028-.77a.499.499 0 0 1-.222-.973c3.048-.696 5.662-.397 7.77.892a.5.5 0 0 1 .166.686m.979-2.178a.624.624 0 0 1-.858.205c-2.15-1.321-5.428-1.704-7.972-.932a.625.625 0 0 1-.362-1.194c2.905-.881 6.517-.454 8.986 1.063a.624.624 0 0 1 .206.858m.084-2.268C10.154 5.56 5.9 5.419 3.438 6.166a.748.748 0 1 1-.434-1.432c2.825-.857 7.523-.692 10.492 1.07a.747.747 0 1 1-.764 1.288"></path>
               </svg>
@@ -79,57 +87,500 @@ const Hero = () => {
                 <path d="M460.6 147.3L353 256.9c-.8.8-.8 2 0 2.8l75.3 80.2c5.1 5.1 5.1 13.3 0 18.4-2.5 2.5-5.9 3.8-9.2 3.8s-6.7-1.3-9.2-3.8l-75-79.9c-.8-.8-2.1-.8-2.9 0L313.7 297c-15.3 15.5-35.6 24.1-57.4 24.2-22.1.1-43.1-9.2-58.6-24.9l-17.6-17.9c-.8-.8-2.1-.8-2.9 0l-75 79.9c-2.5 2.5-5.9 3.8-9.2 3.8s-6.7-1.3-9.2-3.8c-5.1-5.1-5.1-13.3 0-18.4l75.3-80.2c.7-.8.7-2 0-2.8L51.4 147.3c-1.3-1.3-3.4-.4-3.4 1.4V368c0 17.6 14.4 32 32 32h352c17.6 0 32-14.4 32-32V148.7c0-1.8-2.2-2.6-3.4-1.4z"></path>
                 <path d="M256 295.1c14.8 0 28.7-5.8 39.1-16.4L452 119c-5.5-4.4-12.3-7-19.8-7H79.9c-7.5 0-14.4 2.6-19.8 7L217 278.7c10.3 10.5 24.2 16.4 39 16.4z"></path>
               </svg>
-            </div>
+             </div>
           </div>
         </div>
       </section>
 
       {/* الصفحات المنبثقة */}
-      <Modal isOpen={activeModal === 'projects'} onClose={closeModal} title="المشاريع" size="big">
+      <Modal isOpen={activeModal === 'projects'} onClose={closeModal} title="projects" size="big">
         <Projects />
       </Modal>
 
-      <Modal isOpen={activeModal === 'files'} onClose={closeModal} title="الملفات">
-        <div>
-          <h4>الملفات</h4>
-          <p>هنا يمكنك إضافة محتوى الملفات</p>
+      <Modal isOpen={activeModal === 'files'} onClose={closeModal} title="Files">
+        <div style={{padding: '30px', background: 'linear-gradient(135deg, #1a1a1d 0%, #2b2b2e 100%)', minHeight: '400px'}}>
+          {currentSection === 'main' && (
+            <div style={{display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px', justifyItems: 'center'}}>
+              <div onClick={() => { setPreviousSection('main'); setCurrentSection('certificates'); }} onMouseMove={handleMouseMove} style={{
+                background: '#1f1f22',
+                width: '290px',
+                height: '170px',
+                padding: '25px 20px',
+                borderRadius: '12px',
+                border: '1px solid #333',
+                cursor: 'pointer',
+                textAlign: 'center',
+                transition: 'all 0.3s',
+                boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                position: 'relative',
+                overflow: 'hidden'
+              }} onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-5px)'
+                e.currentTarget.style.boxShadow = '0 8px 25px rgba(102, 126, 234, 0.4)'
+                const glow = document.createElement('div')
+                glow.className = 'mouse-glow'
+                glow.style.cssText = 'position: absolute; width: 150px; height: 150px; background: radial-gradient(circle, rgba(102, 126, 234, 0.4) 0%, transparent 70%); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); transition: opacity 0.3s;'
+                e.currentTarget.appendChild(glow)
+              }} onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)'
+                const glow = e.currentTarget.querySelector('.mouse-glow')
+                if (glow) glow.remove()
+              }}>
+                <i className="fas fa-certificate" style={{fontSize: '45px', color: '#667eea', marginBottom: '15px', display: 'block'}}></i>
+                <h4 style={{color: 'white', margin: 0, fontSize: '18px', fontWeight: '600'}}>Certificates</h4>
+                <p style={{color: '#888', fontSize: '13px', marginTop: '8px', marginBottom: 0}}>View my certifications</p>
+              </div>
+              <div onClick={() => { setPreviousSection('main'); setCurrentSection('courses'); }} onMouseMove={handleMouseMove} style={{
+                background: '#1f1f22',
+                width: '290px',
+                height: '170px',
+                padding: '25px 20px',
+                borderRadius: '12px',
+                border: '1px solid #333',
+                cursor: 'pointer',
+                textAlign: 'center',
+                transition: 'all 0.3s',
+                boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                position: 'relative',
+                overflow: 'hidden'
+              }} onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-5px)'
+                e.currentTarget.style.boxShadow = '0 8px 25px rgba(245, 87, 108, 0.4)'
+                const glow = document.createElement('div')
+                glow.className = 'mouse-glow'
+                glow.style.cssText = 'position: absolute; width: 150px; height: 150px; background: radial-gradient(circle, rgba(245, 87, 108, 0.4) 0%, transparent 70%); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); transition: opacity 0.3s;'
+                e.currentTarget.appendChild(glow)
+              }} onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)'
+                const glow = e.currentTarget.querySelector('.mouse-glow')
+                if (glow) glow.remove()
+              }}>
+                <i className="fas fa-book" style={{fontSize: '45px', color: '#f5576c', marginBottom: '15px', display: 'block'}}></i>
+                <h4 style={{color: 'white', margin: 0, fontSize: '18px', fontWeight: '600'}}>Courses</h4>
+                <p style={{color: '#888', fontSize: '13px', marginTop: '8px', marginBottom: 0}}>Completed courses</p>
+              </div>
+              <div onClick={() => { setPreviousSection('main'); setCurrentSection('education'); }} onMouseMove={handleMouseMove} style={{
+                background: '#1f1f22',
+                width: '290px',
+                height: '170px',
+                padding: '25px 20px',
+                borderRadius: '12px',
+                border: '1px solid #333',
+                cursor: 'pointer',
+                textAlign: 'center',
+                transition: 'all 0.3s',
+                boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                position: 'relative',
+                overflow: 'hidden'
+              }} onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-5px)'
+                e.currentTarget.style.boxShadow = '0 8px 25px rgba(79, 172, 254, 0.4)'
+                const glow = document.createElement('div')
+                glow.className = 'mouse-glow'
+                glow.style.cssText = 'position: absolute; width: 150px; height: 150px; background: radial-gradient(circle, rgba(79, 172, 254, 0.4) 0%, transparent 70%); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); transition: opacity 0.3s;'
+                e.currentTarget.appendChild(glow)
+              }} onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)'
+                const glow = e.currentTarget.querySelector('.mouse-glow')
+                if (glow) glow.remove()
+              }}>
+                <i className="fas fa-graduation-cap" style={{fontSize: '45px', color: '#4facfe', marginBottom: '15px', display: 'block'}}></i>
+                <h4 style={{color: 'white', margin: 0, fontSize: '18px', fontWeight: '600'}}>Education</h4>
+                <p style={{color: '#888', fontSize: '13px', marginTop: '8px', marginBottom: 0}}>Academic background</p>
+              </div>
+              <div onClick={() => { setPreviousSection('main'); setCurrentSection('skills'); }} onMouseMove={handleMouseMove} style={{
+                background: '#1f1f22',
+                width: '290px',
+                height: '170px',
+                padding: '25px 20px',
+                borderRadius: '12px',
+                border: '1px solid #333',
+                cursor: 'pointer',
+                textAlign: 'center',
+                transition: 'all 0.3s',
+                boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                position: 'relative',
+                overflow: 'hidden'
+              }} onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-5px)'
+                e.currentTarget.style.boxShadow = '0 8px 25px rgba(250, 112, 154, 0.4)'
+                const glow = document.createElement('div')
+                glow.className = 'mouse-glow'
+                glow.style.cssText = 'position: absolute; width: 150px; height: 150px; background: radial-gradient(circle, rgba(250, 112, 154, 0.4) 0%, transparent 70%); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); transition: opacity 0.3s;'
+                e.currentTarget.appendChild(glow)
+              }} onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)'
+                const glow = e.currentTarget.querySelector('.mouse-glow')
+                if (glow) glow.remove()
+              }}>
+                <i className="fas fa-code" style={{fontSize: '45px', color: '#fa709a', marginBottom: '15px', display: 'block'}}></i>
+                <h4 style={{color: 'white', margin: 0, fontSize: '18px', fontWeight: '600'}}>Skills</h4>
+                <p style={{color: '#888', fontSize: '13px', marginTop: '8px', marginBottom: 0}}>Technical abilities</p>
+              </div>
+              <div onClick={() => { setPreviousSection('main'); setCurrentSection('experience'); }} onMouseMove={handleMouseMove} style={{
+                background: '#1f1f22',
+                width: '290px',
+                height: '170px',
+                padding: '25px 20px',
+                borderRadius: '12px',
+                border: '1px solid #333',
+                cursor: 'pointer',
+                textAlign: 'center',
+                transition: 'all 0.3s',
+                boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                position: 'relative',
+                overflow: 'hidden'
+              }} onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-5px)'
+                e.currentTarget.style.boxShadow = '0 8px 25px rgba(99, 179, 237, 0.4)'
+                const glow = document.createElement('div')
+                glow.className = 'mouse-glow'
+                glow.style.cssText = 'position: absolute; width: 150px; height: 150px; background: radial-gradient(circle, rgba(99, 179, 237, 0.4) 0%, transparent 70%); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); transition: opacity 0.3s;'
+                e.currentTarget.appendChild(glow)
+              }} onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)'
+                const glow = e.currentTarget.querySelector('.mouse-glow')
+                if (glow) glow.remove()
+              }}>
+                <i className="fas fa-briefcase" style={{fontSize: '45px', color: '#63b3ed', marginBottom: '15px', display: 'block'}}></i>
+                <h4 style={{color: 'white', margin: 0, fontSize: '18px', fontWeight: '600'}}>Professional Experience</h4>
+                <p style={{color: '#888', fontSize: '13px', marginTop: '8px', marginBottom: 0}}>Work history</p>
+              </div>
+              <div onClick={() => { setPreviousSection('main'); setCurrentSection('extracurricular'); }} onMouseMove={handleMouseMove} style={{
+                background: '#1f1f22',
+                width: '290px',
+                height: '170px',
+                padding: '25px 20px',
+                borderRadius: '12px',
+                border: '1px solid #333',
+                cursor: 'pointer',
+                textAlign: 'center',
+                transition: 'all 0.3s',
+                boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                position: 'relative',
+                overflow: 'hidden'
+              }} onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-5px)'
+                e.currentTarget.style.boxShadow = '0 8px 25px rgba(159, 122, 234, 0.4)'
+                const glow = document.createElement('div')
+                glow.className = 'mouse-glow'
+                glow.style.cssText = 'position: absolute; width: 150px; height: 150px; background: radial-gradient(circle, rgba(159, 122, 234, 0.4) 0%, transparent 70%); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); transition: opacity 0.3s;'
+                e.currentTarget.appendChild(glow)
+              }} onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)'
+                const glow = e.currentTarget.querySelector('.mouse-glow')
+                if (glow) glow.remove()
+              }}>
+                <i className="fas fa-users" style={{fontSize: '45px', color: '#9f7aea', marginBottom: '15px', display: 'block'}}></i>
+                <h4 style={{color: 'white', margin: 0, fontSize: '18px', fontWeight: '600'}}>Extracurricular Roles</h4>
+                <p style={{color: '#888', fontSize: '13px', marginTop: '8px', marginBottom: 0}}>Activities & leadership</p>
+              </div>
+            </div>
+          )}
+
+          {currentSection === 'certificates' && (
+            <div>
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px', padding: '15px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
+                <button onClick={() => setCurrentSection(previousSection)} style={{
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  color: 'white',
+                  padding: '10px 20px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  fontWeight: '500',
+                  transition: 'transform 0.2s',
+                  boxShadow: '0 2px 10px rgba(102, 126, 234, 0.3)'
+                }} onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
+                  <i className="fas fa-arrow-left" style={{marginRight: '8px'}}></i>
+                  Back to {previousSection === 'main' ? 'Main' : previousSection}
+                </button>
+                <h4 style={{color: 'white', margin: 0, fontSize: '20px'}}><i className="fas fa-certificate" style={{marginRight: '10px', color: '#667eea'}}></i>Certificates</h4>
+              </div>
+              <div style={{padding: '20px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
+                <p style={{color: '#ccc', lineHeight: '1.8'}}>Your certificates content here...</p>
+              </div>
+            </div>
+          )}
+
+          {currentSection === 'courses' && (
+            <div>
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px', padding: '15px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
+                <button onClick={() => setCurrentSection(previousSection)} style={{
+                  background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                  color: 'white',
+                  padding: '10px 20px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  fontWeight: '500',
+                  transition: 'transform 0.2s',
+                  boxShadow: '0 2px 10px rgba(245, 87, 108, 0.3)'
+                }} onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
+                  <i className="fas fa-arrow-left" style={{marginRight: '8px'}}></i>
+                  Back to {previousSection === 'main' ? 'Main' : previousSection}
+                </button>
+                <h4 style={{color: 'white', margin: 0, fontSize: '20px'}}><i className="fas fa-book" style={{marginRight: '10px', color: '#f5576c'}}></i>Courses</h4>
+              </div>
+              <div style={{padding: '20px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
+                <p style={{color: '#ccc', lineHeight: '1.8'}}>Your courses content here...</p>
+              </div>
+            </div>
+          )}
+
+          {currentSection === 'education' && (
+            <div>
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px', padding: '15px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
+                <button onClick={() => setCurrentSection(previousSection)} style={{
+                  background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                  color: 'white',
+                  padding: '10px 20px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  fontWeight: '500',
+                  transition: 'transform 0.2s',
+                  boxShadow: '0 2px 10px rgba(79, 172, 254, 0.3)'
+                }} onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
+                  <i className="fas fa-arrow-left" style={{marginRight: '8px'}}></i>
+                  Back to {previousSection === 'main' ? 'Main' : previousSection}
+                </button>
+                <h4 style={{color: 'white', margin: 0, fontSize: '20px'}}><i className="fas fa-graduation-cap" style={{marginRight: '10px', color: '#4facfe'}}></i>Education</h4>
+              </div>
+              <div style={{padding: '20px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
+                <p style={{color: '#ccc', lineHeight: '1.8'}}>Your education content here...</p>
+              </div>
+            </div>
+          )}
+
+          {currentSection === 'skills' && (
+            <div>
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px', padding: '15px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
+                <button onClick={() => setCurrentSection(previousSection)} style={{
+                  background: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+                  color: 'white',
+                  padding: '10px 20px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  fontWeight: '500',
+                  transition: 'transform 0.2s',
+                  boxShadow: '0 2px 10px rgba(250, 112, 154, 0.3)'
+                }} onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
+                  <i className="fas fa-arrow-left" style={{marginRight: '8px'}}></i>
+                  Back to {previousSection === 'main' ? 'Main' : previousSection}
+                </button>
+                <h4 style={{color: 'white', margin: 0, fontSize: '20px'}}><i className="fas fa-code" style={{marginRight: '10px', color: '#fa709a'}}></i>Skills</h4>
+              </div>
+              <div style={{padding: '20px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
+                <p style={{color: '#ccc', lineHeight: '1.8'}}>Your skills content here...</p>
+              </div>
+            </div>
+          )}
+
+          {currentSection === 'experience' && (
+            <div>
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px', padding: '15px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
+                <button onClick={() => setCurrentSection(previousSection)} style={{
+                  background: 'linear-gradient(135deg, #63b3ed 0%, #3182ce 100%)',
+                  color: 'white',
+                  padding: '10px 20px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  fontWeight: '500',
+                  transition: 'transform 0.2s',
+                  boxShadow: '0 2px 10px rgba(99, 179, 237, 0.3)'
+                }} onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
+                  <i className="fas fa-arrow-left" style={{marginRight: '8px'}}></i>
+                  Back to {previousSection === 'main' ? 'Main' : previousSection}
+                </button>
+                <h4 style={{color: 'white', margin: 0, fontSize: '20px'}}><i className="fas fa-briefcase" style={{marginRight: '10px', color: '#63b3ed'}}></i>Professional Experience</h4>
+              </div>
+              <div style={{padding: '20px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
+                <p style={{color: '#ccc', lineHeight: '1.8'}}>Your professional experience content here...</p>
+              </div>
+            </div>
+          )}
+
+          {currentSection === 'extracurricular' && (
+            <div>
+              <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px', padding: '15px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
+                <button onClick={() => setCurrentSection(previousSection)} style={{
+                  background: 'linear-gradient(135deg, #9f7aea 0%, #805ad5 100%)',
+                  color: 'white',
+                  padding: '10px 20px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  fontWeight: '500',
+                  transition: 'transform 0.2s',
+                  boxShadow: '0 2px 10px rgba(159, 122, 234, 0.3)'
+                }} onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
+                  <i className="fas fa-arrow-left" style={{marginRight: '8px'}}></i>
+                  Back to {previousSection === 'main' ? 'Main' : previousSection}
+                </button>
+                <h4 style={{color: 'white', margin: 0, fontSize: '20px'}}><i className="fas fa-users" style={{marginRight: '10px', color: '#9f7aea'}}></i>Extracurricular Roles</h4>
+              </div>
+              <div style={{padding: '20px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
+                <p style={{color: '#ccc', lineHeight: '1.8'}}>Your extracurricular roles content here...</p>
+              </div>
+            </div>
+          )}
         </div>
       </Modal>
 
-      <Modal isOpen={activeModal === 'latex'} onClose={closeModal} title="LaTeX Editor">
-        <div>
-          <h4>محرر LaTeX</h4>
-          <p>هنا يمكنك إضافة محرر LaTeX</p>
-        </div>
-      </Modal>
-
-      <Modal isOpen={activeModal === 'calendar'} onClose={closeModal} title="التقويم" size="small">
-        <div>
-          <h4>التقويم</h4>
-          <p>التاريخ الحالي: {new Date().toLocaleDateString('ar-EG')}</p>
-        </div>
-      </Modal>
-
-      <Modal isOpen={activeModal === 'spotify'} onClose={closeModal} title="Spotify">
-        <div>
-          <h4>Spotify</h4>
+      <Modal isOpen={activeModal === 'latex'} onClose={closeModal} title="Resume" size="big">
+        <div style={{padding: '20px', textAlign: 'center'}}>
+          <p style={{color: '#ccc', marginBottom: '20px'}}>PDF Viewer (Works after deployment)</p>
           <iframe 
-            src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" 
+            src="/assets/resume/Last Cv Editng Lts..pdf" 
             width="100%" 
-            height="400" 
+            height="480px" 
+            style={{border: '1px solid #333', borderRadius: '8px'}}
+            title="Resume PDF"
+          />
+          <a 
+            href="/assets/resume/Last Cv Editng Lts..pdf" 
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-block',
+              marginTop: '15px',
+              background: '#007acc',
+              color: 'white',
+              padding: '10px 20px',
+              borderRadius: '5px',
+              textDecoration: 'none',
+            }}
+          >
+            Open PDF in New Tab
+          </a>
+        </div>
+      </Modal>
+
+      <Modal isOpen={activeModal === 'spotify'} onClose={closeModal} title="Spotify" size="big">
+        <div style={{padding: '20px'}}>
+          <h4 style={{color: 'white', marginBottom: '15px'}}>My Spotify</h4>
+          <iframe 
+            src="https://open.spotify.com/embed/user/31hmgn23evvuhdifrttyn5posdha" 
+            width="100%" 
+            height="480" 
             frameBorder="0" 
-            allow="encrypted-media">
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            style={{borderRadius: '12px'}}
+          >
           </iframe>
         </div>
       </Modal>
 
-      <Modal isOpen={activeModal === 'email'} onClose={closeModal} title="البريد الإلكتروني">
-        <div>
-          <h4>البريد الإلكتروني</h4>
-          <p>nouribrahem207@gmail.com</p>
-          <button className="btn btn-primary" onClick={() => window.open('mailto:nouribrahem207@gmail.com')}>
-            إرسال إيميل
-          </button>
+      <Modal isOpen={activeModal === 'email'} onClose={closeModal} title="Contact Me">
+        <div style={{padding: '40px 30px', textAlign: 'center', background: 'linear-gradient(135deg, #1a1a1d 0%, #2b2b2e 100%)'}}>
+          <h3 style={{color: 'white', marginBottom: '30px', fontSize: '24px'}}>Let's Connect</h3>
+          
+          <div style={{
+            background: '#1f1f22',
+            padding: '25px',
+            borderRadius: '12px',
+            marginBottom: '20px',
+            border: '1px solid #333',
+            transition: 'transform 0.2s',
+            cursor: 'pointer'
+          }}>
+            <i className="fa-solid fa-envelope" style={{fontSize: '32px', color: '#007acc', marginBottom: '15px', display: 'block'}}></i>
+            <p style={{color: '#aaa', fontSize: '14px', marginBottom: '8px'}}>Email</p>
+            <p style={{color: '#fff', fontSize: '16px', marginBottom: '15px', fontWeight: '500'}}>nouribrahem207@gmail.com</p>
+            <button 
+              onClick={() => window.open('mailto:nouribrahem207@gmail.com')}
+              style={{
+                background: 'linear-gradient(135deg, #007acc 0%, #005a9e 100%)',
+                color: 'white',
+                padding: '12px 30px',
+                borderRadius: '8px',
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: '15px',
+                fontWeight: 'bold',
+                boxShadow: '0 4px 15px rgba(0, 122, 204, 0.3)',
+                transition: 'all 0.3s'
+              }}
+              onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+              onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+            >
+              <i className="fa-solid fa-paper-plane" style={{marginRight: '8px'}}></i>
+              Send Email
+            </button>
+          </div>
+
+          <div style={{
+            background: '#1f1f22',
+            padding: '25px',
+            borderRadius: '12px',
+            border: '1px solid #333',
+            transition: 'transform 0.2s',
+            cursor: 'pointer'
+          }}>
+            <i className="fa-brands fa-whatsapp" style={{fontSize: '32px', color: '#25D366', marginBottom: '15px', display: 'block'}}></i>
+            <p style={{color: '#aaa', fontSize: '14px', marginBottom: '8px'}}>WhatsApp</p>
+            <p style={{color: '#fff', fontSize: '16px', marginBottom: '15px', fontWeight: '500'}}>+20 114 161 5397</p>
+            <button 
+              onClick={() => window.open('https://wa.me/201141615397', '_blank')}
+              style={{
+                background: 'linear-gradient(135deg, #25D366 0%, #128C7E 100%)',
+                color: 'white',
+                padding: '12px 30px',
+                borderRadius: '8px',
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: '15px',
+                fontWeight: 'bold',
+                boxShadow: '0 4px 15px rgba(37, 211, 102, 0.3)',
+                transition: 'all 0.3s'
+              }}
+              onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+              onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+            >
+              <i className="fa-brands fa-whatsapp" style={{marginRight: '8px'}}></i>
+              Chat on WhatsApp
+            </button>
+          </div>
         </div>
       </Modal>
     </>
