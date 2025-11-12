@@ -18,6 +18,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && cd dist && git init && git add -A && git commit -m 'deploy' && git push -f https://github.com/Nour-ibrahem30/New-Portfolio.git main:gh-pages"
   }
 }
