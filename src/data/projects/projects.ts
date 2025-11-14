@@ -5,6 +5,7 @@ export interface ProjectData {
   image?: string
   highlights?: string[]
   learning?: string
+  pdf?: string
 }
 
 export const projectsData: Record<string, ProjectData> = {
@@ -143,5 +144,23 @@ export const projectsData: Record<string, ProjectData> = {
     image: '/assets/images/_image.webp',
     highlights: ['Fully restructured responsive SCSS design', 'Hero section with call-to-action and imagery', 'Modern color palette and visual hierarchy'],
     learning: 'Enhanced my design eye and SCSS modular workflow through complex layout adjustments.'
+  },
+  'Web Master': {
+    name: 'Web Master',
+    description: 'A modern personal portfolio built to showcase my projects, skills, and professional journey with a clean and interactive design.',
+    technologies: ['React', 'TypeScript', 'SCSS'],
+    pdf: '/src/data/Generous-Data/Web master.pdf'
+  },
+  'Nti': {
+    name: 'National Telecommunication Institute',
+    description: 'A professional business template designed for creative agencies, featuring service showcases, team profiles, and testimonials.',
+    technologies: ['HTML5', 'CSS3', 'JavaScript'],
+    pdf: '/src/data/Generous-Data/Nti.pdf'
+  },
+  'Green Studio': {
+    name: 'Green Studio',
+    description: 'A clean and minimalist portfolio layout for freelancers, with an engaging hero section, about info, services, and contact form.',
+    technologies: ['HTML5', 'CSS3', 'JavaScript'],
+    pdf: '/src/data/Generous-Data/Green Studio.pdf'
   }
 }
