@@ -10,15 +10,22 @@
   "devDependencies": {
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.0",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
     "typescript": "^5.4.5",
     "vite": "^4.4.0",
     "sass": "^1.69.5"
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
+    "start": "vite",
     "deploy": "npm run build && cd dist && git init && git add -A && git commit -m 'deploy' && git push -f https://github.com/Nour-ibrahem30/New-Portfolio.git main:gh-pages"
   }
 }

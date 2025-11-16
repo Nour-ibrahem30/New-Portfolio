@@ -6,12 +6,12 @@ const Navbar = () => {
   useEffect(() => {
     const updateTime = () => {
       const now = new Date()
-      setCurrentTime(now.toLocaleTimeString('ar-EG', { 
-        hour: '2-digit', 
-        minute: '2-digit' 
+      setCurrentTime(now.toLocaleTimeString('ar-EG', {
+        hour: '2-digit',
+        minute: '2-digit'
       }))
     }
-    
+
     updateTime()
     const interval = setInterval(updateTime, 1000)
     return () => clearInterval(interval)
@@ -36,7 +36,7 @@ const Navbar = () => {
         </a>
 
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
-                aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+          aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
 
@@ -44,15 +44,15 @@ const Navbar = () => {
           <ul className="navbar-nav mb-2 mb-lg-0">
             <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" href="#" id="fileDropdown" role="button"
-                 data-bs-toggle="dropdown" aria-expanded="false">File</a>
+                data-bs-toggle="dropdown" aria-expanded="false">File</a>
               <ul className="dropdown-menu text-start" aria-labelledby="fileDropdown">
                 <li>
-                  <a className="dropdown-item Resume" href="/assets/resume/Last Cv Editng Lts..pdf" target="_blank">
+                  <a className="dropdown-item Resume" href="/assets/resume/Last Cv Editng Lts..pdf" target="_blank" rel="noopener noreferrer">
                     <i className="fa-solid fa-file me-2"></i>Resume
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="https://github.com/Nour-ibrahem30?tab=repositories" target="_blank">
+                  <a className="dropdown-item" href="https://github.com/Nour-ibrahem30?tab=repositories" target="_blank" rel="noopener noreferrer">
                     <i className="fa-solid fa-folder-open me-2"></i>Projects
                   </a>
                 </li>
@@ -61,7 +61,7 @@ const Navbar = () => {
 
             <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" href="#" id="editDropdown" role="button"
-                 data-bs-toggle="dropdown" aria-expanded="false">Edit</a>
+                data-bs-toggle="dropdown" aria-expanded="false">Edit</a>
               <ul className="dropdown-menu text-start" aria-labelledby="editDropdown">
                 <li>
                   <a className="dropdown-item" href="#" onClick={copyEmail}>
@@ -78,15 +78,15 @@ const Navbar = () => {
 
             <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" href="#" id="goDropdown" role="button"
-                 data-bs-toggle="dropdown" aria-expanded="false">Go</a>
+                data-bs-toggle="dropdown" aria-expanded="false">Go</a>
               <ul className="dropdown-menu text-start" aria-labelledby="goDropdown">
                 <li>
-                  <a className="dropdown-item text-start" href="https://github.com/Nour-ibrahem30" target="_blank">
+                  <a className="dropdown-item text-start" href="https://github.com/Nour-ibrahem30" target="_blank" rel="noopener noreferrer">
                     <i className="fa-brands fa-github me-2"></i>Github
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item text-start" href="https://www.linkedin.com/in/nour-ibrahem-499172346/" target="_blank">
+                  <a className="dropdown-item text-start" href="https://www.linkedin.com/in/nour-ibrahem-499172346/" target="_blank" rel="noopener noreferrer">
                     <i className="fa-brands fa-linkedin me-2"></i>Linkedin
                   </a>
                 </li>
@@ -100,7 +100,7 @@ const Navbar = () => {
 
             <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" href="#" id="helpDropdown" role="button"
-                 data-bs-toggle="dropdown" aria-expanded="false">Help</a>
+                data-bs-toggle="dropdown" aria-expanded="false">Help</a>
               <ul className="dropdown-menu text-start" aria-labelledby="helpDropdown">
                 <li>
                   <a className="dropdown-item" href="#">
@@ -120,7 +120,7 @@ const Navbar = () => {
         <div className="icons">
           <i className="fa-solid fa-wifi fs-6 me-3" title="WiFi Connected"></i>
           <i className="fa-solid fa-magnifying-glass fs-6 me-3" title="Search"></i>
-          <i className="fa-solid fa-code fs-6 vscode-icon" title="VS Code" style={{color: '#007ACC'}}></i>
+          <i className="fa-solid fa-code fs-6 vscode-icon" title="VS Code" style={{ color: '#007ACC' }}></i>
           <span className="time fs-6 ms-2">{currentTime}</span>
         </div>
       </div>

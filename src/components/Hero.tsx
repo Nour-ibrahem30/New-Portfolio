@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Modal from './Modal'
 import Projects from './Projects'
+import { skillsData, experienceData, contactData, educationData, certificatesData, coursesData, extracurricularData } from '../data'
 
 const Hero = () => {
   const [activeModal, setActiveModal] = useState<string | null>(null)
@@ -329,7 +330,24 @@ const Hero = () => {
                 <h4 style={{color: 'white', margin: 0, fontSize: '20px'}}><i className="fas fa-certificate" style={{marginRight: '10px', color: '#667eea'}}></i>Certificates</h4>
               </div>
               <div style={{padding: '20px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
-                <p style={{color: '#ccc', lineHeight: '1.8'}}>Your certificates content here...</p>
+                <div style={{display: 'flex', flexDirection: 'column', gap: '20px'}}>
+                  {certificatesData.map((cert, index) => (
+                    <div key={index} style={{
+                      background: '#2a2a2e',
+                      padding: '20px',
+                      borderRadius: '10px',
+                      border: '1px solid #444'
+                    }}>
+                      <h4 style={{color: 'white', margin: '0 0 10px', fontSize: '18px'}}>{cert.name}</h4>
+                      <p style={{color: '#667eea', margin: '0 0 5px', fontSize: '14px', fontWeight: '500'}}>{cert.issuer}</p>
+                      <p style={{color: '#aaa', margin: '0 0 10px', fontSize: '12px'}}>{cert.date}</p>
+                      <p style={{color: '#ccc', lineHeight: '1.6', margin: '0'}}>{cert.description}</p>
+                      {cert.credentialId && (
+                        <p style={{color: '#888', fontSize: '11px', marginTop: '10px'}}>ID: {cert.credentialId}</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           )}
@@ -355,7 +373,47 @@ const Hero = () => {
                 <h4 style={{color: 'white', margin: 0, fontSize: '20px'}}><i className="fas fa-book" style={{marginRight: '10px', color: '#f5576c'}}></i>Courses</h4>
               </div>
               <div style={{padding: '20px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
-                <p style={{color: '#ccc', lineHeight: '1.8'}}>Your courses content here...</p>
+                <div style={{display: 'flex', flexDirection: 'column', gap: '20px'}}>
+                  {coursesData.map((course, index) => (
+                    <div key={index} style={{
+                      background: '#2a2a2e',
+                      padding: '20px',
+                      borderRadius: '10px',
+                      border: '1px solid #444'
+                    }}>
+                      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '10px'}}>
+                        <h4 style={{color: 'white', margin: 0, fontSize: '18px'}}>{course.title}</h4>
+                        {course.completed && (
+                          <span style={{
+                            background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                            color: 'white',
+                            padding: '4px 8px',
+                            borderRadius: '4px',
+                            fontSize: '11px',
+                            fontWeight: '500'
+                          }}>Completed</span>
+                        )}
+                      </div>
+                      <p style={{color: '#f5576c', margin: '0 0 5px', fontSize: '14px', fontWeight: '500'}}>{course.provider}</p>
+                      <p style={{color: '#aaa', margin: '0 0 10px', fontSize: '12px'}}>{course.duration}</p>
+                      <p style={{color: '#ccc', lineHeight: '1.6', marginBottom: '15px'}}>{course.description}</p>
+                      <div style={{display: 'flex', flexWrap: 'wrap', gap: '8px'}}>
+                        {course.skills.map((skill, skillIndex) => (
+                          <span key={skillIndex} style={{
+                            background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                            color: 'white',
+                            padding: '4px 8px',
+                            borderRadius: '4px',
+                            fontSize: '11px',
+                            fontWeight: '500'
+                          }}>
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           )}
@@ -381,7 +439,24 @@ const Hero = () => {
                 <h4 style={{color: 'white', margin: 0, fontSize: '20px'}}><i className="fas fa-graduation-cap" style={{marginRight: '10px', color: '#4facfe'}}></i>Education</h4>
               </div>
               <div style={{padding: '20px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
-                <p style={{color: '#ccc', lineHeight: '1.8'}}>Your education content here...</p>
+                <div style={{display: 'flex', flexDirection: 'column', gap: '20px'}}>
+                  {educationData.map((edu, index) => (
+                    <div key={index} style={{
+                      background: '#2a2a2e',
+                      padding: '20px',
+                      borderRadius: '10px',
+                      border: '1px solid #444'
+                    }}>
+                      <h4 style={{color: 'white', margin: '0 0 10px', fontSize: '18px'}}>{edu.degree}</h4>
+                      <p style={{color: '#4facfe', margin: '0 0 5px', fontSize: '14px', fontWeight: '500'}}>{edu.institution}</p>
+                      <p style={{color: '#aaa', margin: '0 0 10px', fontSize: '12px'}}>{edu.period}</p>
+                      <p style={{color: '#ccc', lineHeight: '1.6', marginBottom: edu.gpa ? '10px' : '0'}}>{edu.description}</p>
+                      {edu.gpa && (
+                        <p style={{color: '#10b981', fontSize: '13px', fontWeight: '500', margin: 0}}>GPA: {edu.gpa}</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           )}
@@ -407,7 +482,31 @@ const Hero = () => {
                 <h4 style={{color: 'white', margin: 0, fontSize: '20px'}}><i className="fas fa-code" style={{marginRight: '10px', color: '#fa709a'}}></i>Skills</h4>
               </div>
               <div style={{padding: '20px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
-                <p style={{color: '#ccc', lineHeight: '1.8'}}>Your skills content here...</p>
+                <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '15px'}}>
+                  {skillsData.map((skill, index) => (
+                    <div key={index} style={{
+                      background: '#2a2a2e',
+                      padding: '15px',
+                      borderRadius: '8px',
+                      border: '1px solid #444'
+                    }}>
+                      <div style={{display: 'flex', alignItems: 'center', marginBottom: '10px'}}>
+                        {skill.icon && <i className={skill.icon} style={{fontSize: '20px', color: '#667eea', marginRight: '10px'}}></i>}
+                        <h5 style={{color: 'white', margin: 0, fontSize: '16px'}}>{skill.name}</h5>
+                      </div>
+                      <div style={{background: '#1a1a1d', borderRadius: '10px', height: '8px', overflow: 'hidden'}}>
+                        <div style={{
+                          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                          height: '100%',
+                          width: `${skill.level}%`,
+                          borderRadius: '10px',
+                          transition: 'width 0.3s ease'
+                        }}></div>
+                      </div>
+                      <p style={{color: '#aaa', fontSize: '12px', margin: '5px 0 0', textAlign: 'right'}}>{skill.level}%</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           )}
@@ -433,7 +532,37 @@ const Hero = () => {
                 <h4 style={{color: 'white', margin: 0, fontSize: '20px'}}><i className="fas fa-briefcase" style={{marginRight: '10px', color: '#63b3ed'}}></i>Professional Experience</h4>
               </div>
               <div style={{padding: '20px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
-                <p style={{color: '#ccc', lineHeight: '1.8'}}>Your professional experience content here...</p>
+                <div style={{display: 'flex', flexDirection: 'column', gap: '20px'}}>
+                  {experienceData.map((exp, index) => (
+                    <div key={index} style={{
+                      background: '#2a2a2e',
+                      padding: '20px',
+                      borderRadius: '10px',
+                      border: '1px solid #444'
+                    }}>
+                      <div style={{marginBottom: '15px'}}>
+                        <h4 style={{color: 'white', margin: '0 0 5px', fontSize: '18px'}}>{exp.title}</h4>
+                        <p style={{color: '#667eea', margin: '0 0 5px', fontSize: '14px', fontWeight: '500'}}>{exp.company}</p>
+                        <p style={{color: '#aaa', margin: 0, fontSize: '12px'}}>{exp.period}</p>
+                      </div>
+                      <p style={{color: '#ccc', lineHeight: '1.6', marginBottom: '15px'}}>{exp.description}</p>
+                      <div style={{display: 'flex', flexWrap: 'wrap', gap: '8px'}}>
+                        {exp.technologies.map((tech, techIndex) => (
+                          <span key={techIndex} style={{
+                            background: 'linear-gradient(135deg, #63b3ed 0%, #3182ce 100%)',
+                            color: 'white',
+                            padding: '4px 8px',
+                            borderRadius: '4px',
+                            fontSize: '11px',
+                            fontWeight: '500'
+                          }}>
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           )}
@@ -459,7 +588,29 @@ const Hero = () => {
                 <h4 style={{color: 'white', margin: 0, fontSize: '20px'}}><i className="fas fa-users" style={{marginRight: '10px', color: '#9f7aea'}}></i>Extracurricular Roles</h4>
               </div>
               <div style={{padding: '20px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
-                <p style={{color: '#ccc', lineHeight: '1.8'}}>Your extracurricular roles content here...</p>
+                <div style={{display: 'flex', flexDirection: 'column', gap: '20px'}}>
+                  {extracurricularData.map((activity, index) => (
+                    <div key={index} style={{
+                      background: '#2a2a2e',
+                      padding: '20px',
+                      borderRadius: '10px',
+                      border: '1px solid #444'
+                    }}>
+                      <h4 style={{color: 'white', margin: '0 0 10px', fontSize: '18px'}}>{activity.role}</h4>
+                      <p style={{color: '#9f7aea', margin: '0 0 5px', fontSize: '14px', fontWeight: '500'}}>{activity.organization}</p>
+                      <p style={{color: '#aaa', margin: '0 0 15px', fontSize: '12px'}}>{activity.period}</p>
+                      <p style={{color: '#ccc', lineHeight: '1.6', marginBottom: '15px'}}>{activity.description}</p>
+                      <div>
+                        <strong style={{color: 'white', display: 'block', marginBottom: '10px', fontSize: '14px'}}>Key Achievements:</strong>
+                        <ul style={{color: '#ccc', margin: 0, paddingLeft: '20px'}}>
+                          {activity.achievements.map((achievement, achIndex) => (
+                            <li key={achIndex} style={{marginBottom: '5px', fontSize: '13px'}}>{achievement}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           )}
@@ -526,9 +677,9 @@ const Hero = () => {
           }}>
             <i className="fa-solid fa-envelope" style={{fontSize: '32px', color: '#007acc', marginBottom: '15px', display: 'block'}}></i>
             <p style={{color: '#aaa', fontSize: '14px', marginBottom: '8px'}}>Email</p>
-            <p style={{color: '#fff', fontSize: '16px', marginBottom: '15px', fontWeight: '500'}}>nouribrahem207@gmail.com</p>
+            <p style={{color: '#fff', fontSize: '16px', marginBottom: '15px', fontWeight: '500'}}>{contactData.email}</p>
             <button 
-              onClick={() => window.open('mailto:nouribrahem207@gmail.com')}
+              onClick={() => window.open(`mailto:${contactData.email}`)}
               style={{
                 background: 'linear-gradient(135deg, #007acc 0%, #005a9e 100%)',
                 color: 'white',
@@ -559,9 +710,9 @@ const Hero = () => {
           }}>
             <i className="fa-brands fa-whatsapp" style={{fontSize: '32px', color: '#25D366', marginBottom: '15px', display: 'block'}}></i>
             <p style={{color: '#aaa', fontSize: '14px', marginBottom: '8px'}}>WhatsApp</p>
-            <p style={{color: '#fff', fontSize: '16px', marginBottom: '15px', fontWeight: '500'}}>+20 114 161 5397</p>
+            <p style={{color: '#fff', fontSize: '16px', marginBottom: '15px', fontWeight: '500'}}>{contactData.phone}</p>
             <button 
-              onClick={() => window.open('https://wa.me/201141615397', '_blank')}
+              onClick={() => window.open(`https://wa.me/${contactData.phone.replace(/[^0-9]/g, '')}`, '_blank')}
               style={{
                 background: 'linear-gradient(135deg, #25D366 0%, #128C7E 100%)',
                 color: 'white',

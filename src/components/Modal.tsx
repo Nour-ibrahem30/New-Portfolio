@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from 'react'
-
 interface ModalProps {
   isOpen: boolean
   onClose: () => void
@@ -16,6 +15,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, size = 
   const dragHandle = useRef<HTMLDivElement>(null)
   const [isMinimized, setIsMinimized] = useState(false)
   const [isMaximized, setIsMaximized] = useState(false)
+  const [position, setPosition] = useState({ x: 0, y: 0 })
+  const [isInitialized, setIsInitialized] = useState(false)
 
   const handleMinimize = (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -35,6 +36,21 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, size = 
   }
 
 
+
+  useEffect(() => {
+    if (!isOpen || !modalRef.current) return
+
+    const modal = modalRef.current
+    
+    // Initialize position on first open
+    if (!isInitialized) {
+      const rect = modal.getBoundingClientRect()
+      const centerX = (window.innerWidth - rect.width) / 2
+      const centerY = (window.innerHeight - rect.height) / 2
+      setPosition({ x: centerX, y: centerY })
+      setIsInitialized(true)
+    }
+  }, [isOpen, isInitialized])
 
   useEffect(() => {
     if (!isOpen || !modalRef.current || !dragHandle.current) return
@@ -58,8 +74,18 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, size = 
       if (!isDragging.current) return
       const deltaX = e.clientX - dragStart.current.x
       const deltaY = e.clientY - dragStart.current.y
-      modal.style.left = `${modalStart.current.x + deltaX}px`
-      modal.style.top = `${modalStart.current.y + deltaY}px`
+      const newX = modalStart.current.x + deltaX
+      const newY = modalStart.current.y + deltaY
+      
+      // Bounds checking
+      const maxX = window.innerWidth - modal.offsetWidth
+      const maxY = window.innerHeight - modal.offsetHeight
+      const boundedX = Math.max(0, Math.min(newX, maxX))
+      const boundedY = Math.max(0, Math.min(newY, maxY))
+      
+      setPosition({ x: boundedX, y: boundedY })
+      modal.style.left = `${boundedX}px`
+      modal.style.top = `${boundedY}px`
       modal.style.transform = 'none'
     }
 
@@ -101,6 +127,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, size = 
         className="page-project"
         style={{
           position: 'fixed',
+          left: isMaximized ? '50%' : `${position.x}px`,
+          top: isMaximized ? '50%' : `${position.y}px`,
+          transform: isMaximized ? 'translate(-50%, -50%)' : 'none',
           ...getModalSize(),
           transition: 'all 0.3s ease',
           zIndex: 10000
@@ -115,7 +144,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, size = 
             ref={dragHandle}
             style={{
               flex: 1,
-              cursor: isMaximized ? 'default' : 'grab',
+              cursor: isMaximized || isMinimized ? 'default' : 'grab',
               display: 'flex',
               alignItems: 'center',
               paddingLeft: 12,

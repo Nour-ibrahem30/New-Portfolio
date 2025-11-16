@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { projectsData } from '../data/projectsData'
+import { projectsData } from '../data/projects/projects'
 import Modal from './Modal'
 
 interface Project {
@@ -15,19 +15,7 @@ const Projects = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-    const glow = e.currentTarget.querySelector('.mouse-glow') as HTMLElement
-    if (glow) {
-      glow.style.left = `${x}px`
-      glow.style.top = `${y}px`
-    }
-  }
-
   const getProjectData = (projectName: string) => {
-    console.log('Looking for:', projectName, 'Found:', projectsData[projectName])
     return projectsData[projectName] || null
   }
 
@@ -112,7 +100,7 @@ const Projects = () => {
                 alt={project.name}
                 style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                 onError={(e) => {
-                  ;(e.currentTarget as HTMLImageElement).src = '/assets/images/_image.webp'
+                  (e.currentTarget as HTMLImageElement).src = '/assets/images/_image.webp'
                 }}
               />
             </div>
