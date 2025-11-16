@@ -68,10 +68,11 @@ const Projects = () => {
           className="parent-project"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: '18px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '24px',
             width: '100%',
             boxSizing: 'border-box',
+            padding: '0 10px'
           }}
         >
         {filteredProjects.map((project, index) => (
@@ -80,7 +81,7 @@ const Projects = () => {
             className="div-project"
             style={{
               width: '100%',
-              minHeight: '330px',
+              minHeight: '360px',
               background: 'var(--card-bg, #161616)',
               borderRadius: 12,
               padding: 16,
@@ -90,7 +91,16 @@ const Projects = () => {
               flexDirection: 'column',
               gap: 12,
               cursor: 'pointer',
-              transition: 'transform 0.2s, box-shadow 0.2s'
+              transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+              userSelect: 'none'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-8px)'
+              e.currentTarget.style.boxShadow = '0 12px 28px rgba(102, 126, 234, 0.3)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)'
+              e.currentTarget.style.boxShadow = '0 6px 18px rgba(0,0,0,0.4)'
             }}
             onClick={() => setSelectedProject(project)}
           >

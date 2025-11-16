@@ -64,30 +64,30 @@ const Hero = () => {
 
           <div className="links">
             <div className="icons-links">
-              <div className="icon-wrapper" onClick={() => openModal('projects')} title="Github Projects">
+              <div className="icon-wrapper" onClick={() => openModal('projects')} title="Github Projects" style={{cursor: 'pointer'}}>
                 <img src="/assets/icons/github-6980894_640.webp" alt="github" className="github-icon" loading="lazy" />
               </div>
 
-              <div className="icon-wrapper" onClick={() => openModal('files')} title="Files & Documents">
+              <div className="icon-wrapper" onClick={() => openModal('files')} title="Files & Documents" style={{cursor: 'pointer'}}>
                 <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 16 16" className="text-white" height="35" width="35">
                   <path d="M2.5 1A1.5 1.5 0 0 0 1 2.5v11A1.5 1.5 0 0 0 2.5 15h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 15 8.586V2.5A1.5 1.5 0 0 0 13.5 1zm6 8.5a1 1 0 0 1 1-1h4.396a.25.25 0 0 1 .177.427l-5.146 5.146a.25.25 0 0 1-.427-.177z"></path>
                 </svg>
               </div>
 
-              <div className="icon-wrapper" onClick={() => openModal('latex')} title="Resume PDF">
+              <div className="icon-wrapper" onClick={() => openModal('latex')} title="Resume PDF" style={{cursor: 'pointer'}}>
                 <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 16 16" className="text-white" height="35" width="35">
                   <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1"></path>
                   <path d="M4.603 12.087a.8.8 0 0 1-.438-.42c-.195-.388-.13-.776.08-1.102.198-.307.526-.568.897-.787a7.7 7.7 0 0 1 1.482-.645 20 20 0 0 0 1.062-2.227 7.3 7.3 0 0 1-.43-1.295c-.086-.4-.119-.796-.046-1.136.075-.354.274-.672.65-.823.192-.077.4-.12.602-.077a.7.7 0 0 1 .477.365c.088.164.12.356.127.538.007.187-.012.395-.047.614-.084.51-.27 1.134-.52 1.794a11 11 0 0 0 .98 1.686 5.8 5.8 0 0 1 1.334.05c.364.065.734.195.96.465.12.144.193.32.2.518.007.192-.047.382-.138.563a1.04 1.04 0 0 1-.354.416.86.86 0 0 1-.51.138c-.331-.014-.654-.196-.933-.417a5.7 5.7 0 0 1-.911-.95 11.6 11.6 0 0 0-1.997.406 11.3 11.3 0 0 1-1.021 1.51c-.29.35-.608.655-.926.787a.8.8 0 0 1-.58.029"></path>
                 </svg>
               </div>
 
-              <div className="icon-wrapper" onClick={() => openModal('spotify')} title="Spotify Playlist">
+              <div className="icon-wrapper" onClick={() => openModal('spotify')} title="Spotify Playlist" style={{cursor: 'pointer'}}>
                 <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 16 16" className="text-white" height="35" width="35">
                   <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.669 11.538a.5.5 0 0 1-.686.165c-1.879-1.147-4.243-1.407-7.028-.77a.499.499 0 0 1-.222-.973c3.048-.696 5.662-.397 7.77.892a.5.5 0 0 1 .166.686m.979-2.178a.624.624 0 0 1-.858.205c-2.15-1.321-5.428-1.704-7.972-.932a.625.625 0 0 1-.362-1.194c2.905-.881 6.517-.454 8.986 1.063a.624.624 0 0 1 .206.858m.084-2.268C10.154 5.56 5.9 5.419 3.438 6.166a.748.748 0 1 1-.434-1.432c2.825-.857 7.523-.692 10.492 1.07a.747.747 0 1 1-.764 1.288"></path>
                 </svg>
               </div>
 
-              <div className="icon-wrapper" onClick={() => openModal('email')} title="Contact Me">
+              <div className="icon-wrapper" onClick={() => openModal('email')} title="Contact Me" style={{cursor: 'pointer'}}>
                 <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512" className="text-white" height="35" width="35">
                   <path d="M460.6 147.3L353 256.9c-.8.8-.8 2 0 2.8l75.3 80.2c5.1 5.1 5.1 13.3 0 18.4-2.5 2.5-5.9 3.8-9.2 3.8s-6.7-1.3-9.2-3.8l-75-79.9c-.8-.8-2.1-.8-2.9 0L313.7 297c-15.3 15.5-35.6 24.1-57.4 24.2-22.1.1-43.1-9.2-58.6-24.9l-17.6-17.9c-.8-.8-2.1-.8-2.9 0l-75 79.9c-2.5 2.5-5.9 3.8-9.2 3.8s-6.7-1.3-9.2-3.8c-5.1-5.1-5.1-13.3 0-18.4l75.3-80.2c.7-.8.7-2 0-2.8L51.4 147.3c-1.3-1.3-3.4-.4-3.4 1.4V368c0 17.6 14.4 32 32 32h352c17.6 0 32-14.4 32-32V148.7c0-1.8-2.2-2.6-3.4-1.4z"></path>
                   <path d="M256 295.1c14.8 0 28.7-5.8 39.1-16.4L452 119c-5.5-4.4-12.3-7-19.8-7H79.9c-7.5 0-14.4 2.6-19.8 7L217 278.7c10.3 10.5 24.2 16.4 39 16.4z"></path>
@@ -690,7 +690,6 @@ const Hero = () => {
 
       <Modal isOpen={activeModal === 'latex'} onClose={closeModal} title="Resume" size="big">
         <div style={{padding: '20px', textAlign: 'center'}}>
-          <p style={{color: '#ccc', marginBottom: '20px'}}>PDF Viewer (Works after deployment)</p>
           <iframe 
             src="/assets/resume/Last Cv Editng Lts..pdf" 
             width="100%" 
@@ -722,7 +721,7 @@ const Hero = () => {
         <div style={{padding: '20px'}}>
           <h4 style={{color: 'white', marginBottom: '15px'}}>My Spotify</h4>
           <iframe 
-            src="https://open.spotify.com/embed/user/31hmgn23evvuhdifrttyn5posdha" 
+            src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" 
             width="100%" 
             height="480" 
             frameBorder="0" 
