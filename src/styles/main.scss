@@ -18,7 +18,7 @@ body {
     padding: 0;
     background-color: #000;
     color: white;
-    font-family: "Poppins", sans-serif;
+    font-family: "Poppins", system-ui, -apple-system, sans-serif;
     font-display: swap;
 }
 
@@ -325,122 +325,53 @@ body {
 
     .links {
         width: 400px;
-        height: 85px;
+        height: 70px;
         margin: auto;
-        padding: 15px;
+        padding: 10px;
         position: relative;
         top: -100px;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 20px;
-        background: linear-gradient(135deg, rgba(43, 55, 73, 0.9) 0%, rgba(30, 41, 57, 0.9) 100%);
-        backdrop-filter: blur(20px);
+        border-radius: 15px;
+        background: rgba(30, 30, 35, 0.8);
+        backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 
         .icons-links {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
 
             .icon-wrapper {
-                width: 55px;
-                height: 55px;
+                width: 50px;
+                height: 50px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
-                border-radius: 12px;
-                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                position: relative;
-                overflow: hidden;
-                backdrop-filter: blur(10px);
+                border-radius: 10px;
+                background: rgba(255, 255, 255, 0.1);
+                transition: all 0.3s ease;
                 border: 1px solid rgba(255, 255, 255, 0.1);
 
-                &::before {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-                    transform: translateX(-100%);
-                    transition: transform 0.6s;
-                }
-
                 &:hover {
-                    transform: translateY(-8px) scale(1.1);
-                    box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 5px 15px rgba(0,0,0,0.2);
-                    border-color: rgba(255, 255, 255, 0.3);
-
-                    &::before {
-                        transform: translateX(100%);
-                    }
-                }
-
-                &:active {
-                    transform: translateY(-4px) scale(1.05);
-                }
-
-                &:nth-child(1) {
-                    background: linear-gradient(135deg, #333 0%, #000 100%);
-                    
-                    &:hover {
-                        background: linear-gradient(135deg, #444 0%, #111 100%);
-                        box-shadow: 0 15px 35px rgba(0,0,0,0.6), 0 0 20px rgba(255,255,255,0.1);
-                    }
-                }
-
-                &:nth-child(2) {
-                    background: linear-gradient(135deg, #ff9500 0%, #e19e00 100%);
-                    
-                    &:hover {
-                        background: linear-gradient(135deg, #ffb84d 0%, #ff9500 100%);
-                        box-shadow: 0 15px 35px rgba(255, 149, 0, 0.4), 0 0 20px rgba(255, 149, 0, 0.3);
-                    }
-                }
-
-                &:nth-child(3) {
-                    background: linear-gradient(135deg, #ff4757 0%, #f33a3e 100%);
-                    
-                    &:hover {
-                        background: linear-gradient(135deg, #ff6b7a 0%, #ff4757 100%);
-                        box-shadow: 0 15px 35px rgba(255, 71, 87, 0.4), 0 0 20px rgba(255, 71, 87, 0.3);
-                    }
-                }
-
-                &:nth-child(4) {
-                    background: linear-gradient(135deg, #1db954 0%, #00db6e 100%);
-                    
-                    &:hover {
-                        background: linear-gradient(135deg, #1ed760 0%, #1db954 100%);
-                        box-shadow: 0 15px 35px rgba(29, 185, 84, 0.4), 0 0 20px rgba(29, 185, 84, 0.3);
-                    }
-                }
-
-                &:nth-child(5) {
-                    background: linear-gradient(135deg, #4285f4 0%, #3282ff 100%);
-                    
-                    &:hover {
-                        background: linear-gradient(135deg, #5a95f5 0%, #4285f4 100%);
-                        box-shadow: 0 15px 35px rgba(66, 133, 244, 0.4), 0 0 20px rgba(66, 133, 244, 0.3);
-                    }
+                    transform: translateY(-3px);
+                    background: rgba(255, 255, 255, 0.2);
+                    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
                 }
 
                 img {
-                    width: 35px;
-                    height: 35px;
-                    border-radius: 6px;
-                    transition: all 0.3s ease;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 5px;
                 }
 
                 svg {
-                    width: 30px;
-                    height: 30px;
+                    width: 28px;
+                    height: 28px;
                     color: white;
-                    transition: all 0.3s ease;
                 }
             }
         }

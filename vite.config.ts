@@ -9,6 +9,14 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-dom'],
           bootstrap: ['bootstrap']
+        },
+        assetFileNames: (assetInfo) => {
+          const info = assetInfo.name.split('.')
+          const ext = info[info.length - 1]
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(ext)) {
+            return `assets/images/[name]-[hash][extname]`
+          }
+          return `assets/[name]-[hash][extname]`
         }
       }
     },
@@ -16,9 +24,13 @@ export default defineConfig({
     terserOptions: {
       compress: {
         drop_console: true,
-        drop_debugger: true
+        drop_debugger: true,
+        pure_funcs: ['console.log']
       }
-    }
+    },
+    cssCodeSplit: true,
+    sourcemap: false,
+    target: 'es2015'
   },
   server: {
     port: 3000
