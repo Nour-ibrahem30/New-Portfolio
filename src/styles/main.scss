@@ -324,7 +324,7 @@ body {
     }
 
     .links {
-        width: 400px;
+        width: 350px;
         height: 70px;
         margin: auto;
         padding: 10px;
@@ -360,6 +360,36 @@ body {
                     transform: translateY(-3px);
                     background: rgba(255, 255, 255, 0.2);
                     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+                }
+
+                &:nth-child(1):hover {
+                    background: rgba(102, 126, 234, 0.2);
+                    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+                    border-color: rgba(102, 126, 234, 0.5);
+                }
+
+                &:nth-child(2):hover {
+                    background: rgba(245, 87, 108, 0.2);
+                    box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
+                    border-color: rgba(245, 87, 108, 0.5);
+                }
+
+                &:nth-child(3):hover {
+                    background: rgba(79, 172, 254, 0.2);
+                    box-shadow: 0 8px 20px rgba(79, 172, 254, 0.4);
+                    border-color: rgba(79, 172, 254, 0.5);
+                }
+
+                &:nth-child(4):hover {
+                    background: rgba(30, 215, 96, 0.2);
+                    box-shadow: 0 8px 20px rgba(30, 215, 96, 0.4);
+                    border-color: rgba(30, 215, 96, 0.5);
+                }
+
+                &:nth-child(5):hover {
+                    background: rgba(250, 112, 154, 0.2);
+                    box-shadow: 0 8px 20px rgba(250, 112, 154, 0.4);
+                    border-color: rgba(250, 112, 154, 0.5);
                 }
 
                 img {

@@ -17,12 +17,14 @@ const Navbar = () => {
     return () => clearInterval(interval)
   }, [])
 
-  const copyEmail = () => {
+  const copyEmail = (e: React.MouseEvent) => {
+    e.preventDefault()
     navigator.clipboard.writeText('nouribrahem207@gmail.com')
       .then(() => alert('تم نسخ الإيميل بنجاح!'))
   }
 
-  const copyPhone = () => {
+  const copyPhone = (e: React.MouseEvent) => {
+    e.preventDefault()
     navigator.clipboard.writeText('+1234567890')
       .then(() => alert('تم نسخ رقم الهاتف بنجاح!'))
   }
@@ -30,7 +32,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand" href="https://github.com/Nour-ibrahem30" target="_blank" rel="noopener noreferrer">
           <i className="fa-brands fa-apple fs-4 me-2"></i>
           Nour Ibrahem
         </a>
@@ -43,7 +45,7 @@ const Navbar = () => {
         <div className="collapse navbar-collapse align-items-center" id="navbarTogglerDemo03">
           <ul className="navbar-nav mb-2 mb-lg-0">
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" id="fileDropdown" role="button"
+              <a className="nav-link dropdown-toggle" href="https://github.com/Nour-ibrahem30?tab=repositories" id="fileDropdown" role="button"
                 data-bs-toggle="dropdown" aria-expanded="false">File</a>
               <ul className="dropdown-menu text-start" aria-labelledby="fileDropdown">
                 <li>
@@ -60,7 +62,7 @@ const Navbar = () => {
             </li>
 
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" id="editDropdown" role="button"
+              <a className="nav-link dropdown-toggle" href="mailto:nouribrahem207@gmail.com" id="editDropdown" role="button"
                 data-bs-toggle="dropdown" aria-expanded="false">Edit</a>
               <ul className="dropdown-menu text-start" aria-labelledby="editDropdown">
                 <li>
@@ -77,7 +79,7 @@ const Navbar = () => {
             </li>
 
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" id="goDropdown" role="button"
+              <a className="nav-link dropdown-toggle" href="https://github.com/Nour-ibrahem30" id="goDropdown" role="button"
                 data-bs-toggle="dropdown" aria-expanded="false">Go</a>
               <ul className="dropdown-menu text-start" aria-labelledby="goDropdown">
                 <li>
@@ -99,16 +101,16 @@ const Navbar = () => {
             </li>
 
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" id="helpDropdown" role="button"
+              <a className="nav-link dropdown-toggle" href="https://www.linkedin.com/in/nour-ibrahem-499172346/" id="helpDropdown" role="button"
                 data-bs-toggle="dropdown" aria-expanded="false">Help</a>
               <ul className="dropdown-menu text-start" aria-labelledby="helpDropdown">
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" href="https://github.com/Nour-ibrahem30" target="_blank" rel="noopener noreferrer">
                     <i className="fa-solid fa-circle-question me-2"></i>Show Help
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" href="https://www.linkedin.com/in/nour-ibrahem-499172346/" target="_blank" rel="noopener noreferrer">
                     <i className="fa-solid fa-chalkboard-user me-2"></i>Show Tutorial
                   </a>
                 </li>
