@@ -34,7 +34,7 @@ const Hero = () => {
   return (
     <>
       <section className="hero">
-        <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel">
+        <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel" data-bs-interval="8000">
           <div className="carousel-inner">
             <div className="carousel-item active">
               <img src="/assets/images/_image.webp" className="d-block w-100" alt="Image-Slider One" />
@@ -313,19 +313,30 @@ const Hero = () => {
             <div>
               <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px', padding: '15px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
                 <button onClick={() => setCurrentSection(previousSection)} style={{
-                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                  background: 'linear-gradient(135deg, #2a2a2e 0%, #1f1f22 100%)',
                   color: 'white',
-                  padding: '10px 20px',
-                  borderRadius: '8px',
-                  border: 'none',
+                  padding: '12px 24px',
+                  borderRadius: '12px',
+                  border: '1px solid #444',
                   cursor: 'pointer',
                   fontSize: '14px',
                   fontWeight: '500',
-                  transition: 'transform 0.2s',
-                  boxShadow: '0 2px 10px rgba(102, 126, 234, 0.3)'
-                }} onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
-                  <i className="fas fa-arrow-left" style={{marginRight: '8px'}}></i>
-                  Back to {previousSection === 'main' ? 'Main' : previousSection}
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }} onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-3px)'
+                  e.currentTarget.style.boxShadow = '0 8px 25px rgba(102, 126, 234, 0.4)'
+                  e.currentTarget.style.borderColor = '#667eea'
+                }} onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)'
+                  e.currentTarget.style.borderColor = '#444'
+                }}>
+                  <i className="fas fa-arrow-left"></i>
+                  <span>Back to {previousSection === 'main' ? 'Main' : previousSection}</span>
                 </button>
                 <h4 style={{color: 'white', margin: 0, fontSize: '20px'}}><i className="fas fa-certificate" style={{marginRight: '10px', color: '#667eea'}}></i>Certificates</h4>
               </div>
@@ -356,19 +367,30 @@ const Hero = () => {
             <div>
               <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px', padding: '15px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
                 <button onClick={() => setCurrentSection(previousSection)} style={{
-                  background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                  background: 'linear-gradient(135deg, #2a2a2e 0%, #1f1f22 100%)',
                   color: 'white',
-                  padding: '10px 20px',
-                  borderRadius: '8px',
-                  border: 'none',
+                  padding: '12px 24px',
+                  borderRadius: '12px',
+                  border: '1px solid #444',
                   cursor: 'pointer',
                   fontSize: '14px',
                   fontWeight: '500',
-                  transition: 'transform 0.2s',
-                  boxShadow: '0 2px 10px rgba(245, 87, 108, 0.3)'
-                }} onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
-                  <i className="fas fa-arrow-left" style={{marginRight: '8px'}}></i>
-                  Back to {previousSection === 'main' ? 'Main' : previousSection}
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }} onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-3px)'
+                  e.currentTarget.style.boxShadow = '0 8px 25px rgba(245, 87, 108, 0.4)'
+                  e.currentTarget.style.borderColor = '#f5576c'
+                }} onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)'
+                  e.currentTarget.style.borderColor = '#444'
+                }}>
+                  <i className="fas fa-arrow-left"></i>
+                  <span>Back to {previousSection === 'main' ? 'Main' : previousSection}</span>
                 </button>
                 <h4 style={{color: 'white', margin: 0, fontSize: '20px'}}><i className="fas fa-book" style={{marginRight: '10px', color: '#f5576c'}}></i>Courses</h4>
               </div>
@@ -422,19 +444,30 @@ const Hero = () => {
             <div>
               <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px', padding: '15px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
                 <button onClick={() => setCurrentSection(previousSection)} style={{
-                  background: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                  background: 'linear-gradient(135deg, #2a2a2e 0%, #1f1f22 100%)',
                   color: 'white',
-                  padding: '10px 20px',
-                  borderRadius: '8px',
-                  border: 'none',
+                  padding: '12px 24px',
+                  borderRadius: '12px',
+                  border: '1px solid #444',
                   cursor: 'pointer',
                   fontSize: '14px',
                   fontWeight: '500',
-                  transition: 'transform 0.2s',
-                  boxShadow: '0 2px 10px rgba(79, 172, 254, 0.3)'
-                }} onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
-                  <i className="fas fa-arrow-left" style={{marginRight: '8px'}}></i>
-                  Back to {previousSection === 'main' ? 'Main' : previousSection}
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }} onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-3px)'
+                  e.currentTarget.style.boxShadow = '0 8px 25px rgba(79, 172, 254, 0.4)'
+                  e.currentTarget.style.borderColor = '#4facfe'
+                }} onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)'
+                  e.currentTarget.style.borderColor = '#444'
+                }}>
+                  <i className="fas fa-arrow-left"></i>
+                  <span>Back to {previousSection === 'main' ? 'Main' : previousSection}</span>
                 </button>
                 <h4 style={{color: 'white', margin: 0, fontSize: '20px'}}><i className="fas fa-graduation-cap" style={{marginRight: '10px', color: '#4facfe'}}></i>Education</h4>
               </div>
@@ -465,19 +498,30 @@ const Hero = () => {
             <div>
               <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px', padding: '15px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
                 <button onClick={() => setCurrentSection(previousSection)} style={{
-                  background: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+                  background: 'linear-gradient(135deg, #2a2a2e 0%, #1f1f22 100%)',
                   color: 'white',
-                  padding: '10px 20px',
-                  borderRadius: '8px',
-                  border: 'none',
+                  padding: '12px 24px',
+                  borderRadius: '12px',
+                  border: '1px solid #444',
                   cursor: 'pointer',
                   fontSize: '14px',
                   fontWeight: '500',
-                  transition: 'transform 0.2s',
-                  boxShadow: '0 2px 10px rgba(250, 112, 154, 0.3)'
-                }} onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
-                  <i className="fas fa-arrow-left" style={{marginRight: '8px'}}></i>
-                  Back to {previousSection === 'main' ? 'Main' : previousSection}
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }} onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-3px)'
+                  e.currentTarget.style.boxShadow = '0 8px 25px rgba(250, 112, 154, 0.4)'
+                  e.currentTarget.style.borderColor = '#fa709a'
+                }} onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)'
+                  e.currentTarget.style.borderColor = '#444'
+                }}>
+                  <i className="fas fa-arrow-left"></i>
+                  <span>Back to {previousSection === 'main' ? 'Main' : previousSection}</span>
                 </button>
                 <h4 style={{color: 'white', margin: 0, fontSize: '20px'}}><i className="fas fa-code" style={{marginRight: '10px', color: '#fa709a'}}></i>Skills</h4>
               </div>
@@ -515,19 +559,30 @@ const Hero = () => {
             <div>
               <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px', padding: '15px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
                 <button onClick={() => setCurrentSection(previousSection)} style={{
-                  background: 'linear-gradient(135deg, #63b3ed 0%, #3182ce 100%)',
+                  background: 'linear-gradient(135deg, #2a2a2e 0%, #1f1f22 100%)',
                   color: 'white',
-                  padding: '10px 20px',
-                  borderRadius: '8px',
-                  border: 'none',
+                  padding: '12px 24px',
+                  borderRadius: '12px',
+                  border: '1px solid #444',
                   cursor: 'pointer',
                   fontSize: '14px',
                   fontWeight: '500',
-                  transition: 'transform 0.2s',
-                  boxShadow: '0 2px 10px rgba(99, 179, 237, 0.3)'
-                }} onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
-                  <i className="fas fa-arrow-left" style={{marginRight: '8px'}}></i>
-                  Back to {previousSection === 'main' ? 'Main' : previousSection}
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }} onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-3px)'
+                  e.currentTarget.style.boxShadow = '0 8px 25px rgba(99, 179, 237, 0.4)'
+                  e.currentTarget.style.borderColor = '#63b3ed'
+                }} onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)'
+                  e.currentTarget.style.borderColor = '#444'
+                }}>
+                  <i className="fas fa-arrow-left"></i>
+                  <span>Back to {previousSection === 'main' ? 'Main' : previousSection}</span>
                 </button>
                 <h4 style={{color: 'white', margin: 0, fontSize: '20px'}}><i className="fas fa-briefcase" style={{marginRight: '10px', color: '#63b3ed'}}></i>Professional Experience</h4>
               </div>
@@ -571,19 +626,30 @@ const Hero = () => {
             <div>
               <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px', padding: '15px', background: '#1f1f22', borderRadius: '10px', border: '1px solid #333'}}>
                 <button onClick={() => setCurrentSection(previousSection)} style={{
-                  background: 'linear-gradient(135deg, #9f7aea 0%, #805ad5 100%)',
+                  background: 'linear-gradient(135deg, #2a2a2e 0%, #1f1f22 100%)',
                   color: 'white',
-                  padding: '10px 20px',
-                  borderRadius: '8px',
-                  border: 'none',
+                  padding: '12px 24px',
+                  borderRadius: '12px',
+                  border: '1px solid #444',
                   cursor: 'pointer',
                   fontSize: '14px',
                   fontWeight: '500',
-                  transition: 'transform 0.2s',
-                  boxShadow: '0 2px 10px rgba(159, 122, 234, 0.3)'
-                }} onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
-                  <i className="fas fa-arrow-left" style={{marginRight: '8px'}}></i>
-                  Back to {previousSection === 'main' ? 'Main' : previousSection}
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }} onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-3px)'
+                  e.currentTarget.style.boxShadow = '0 8px 25px rgba(159, 122, 234, 0.4)'
+                  e.currentTarget.style.borderColor = '#9f7aea'
+                }} onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)'
+                  e.currentTarget.style.borderColor = '#444'
+                }}>
+                  <i className="fas fa-arrow-left"></i>
+                  <span>Back to {previousSection === 'main' ? 'Main' : previousSection}</span>
                 </button>
                 <h4 style={{color: 'white', margin: 0, fontSize: '20px'}}><i className="fas fa-users" style={{marginRight: '10px', color: '#9f7aea'}}></i>Extracurricular Roles</h4>
               </div>
