@@ -1,0 +1,70 @@
+/* Critical CSS - Inline this in production */
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: #000;
+  color: #fff;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.carousel {
+  width: 100%;
+  height: 100vh;
+}
+
+.carousel-inner {
+  height: 100%;
+}
+
+.carousel-item {
+  height: 100%;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.links {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.icons-links {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.icon-wrapper {
+  transition: transform 0.2s;
+}
+
+.icon-wrapper:hover {
+  transform: scale(1.1);
+}
+
+/* Reduce layout shift */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Loading state */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
