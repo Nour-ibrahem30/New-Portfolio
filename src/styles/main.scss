@@ -19,6 +19,7 @@ body {
     background-color: #000;
     color: white;
     font-family: "Poppins", sans-serif;
+    font-display: swap;
 }
 
 html,
@@ -323,61 +324,123 @@ body {
     }
 
     .links {
-        width: 340px;
-        height: 75px;
+        width: 400px;
+        height: 85px;
         margin: auto;
-        padding: 10px;
+        padding: 15px;
         position: relative;
-        top: -90px;
+        top: -100px;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 17px;
-        background-color: #2b3749;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+        border-radius: 20px;
+        background: linear-gradient(135deg, rgba(43, 55, 73, 0.9) 0%, rgba(30, 41, 57, 0.9) 100%);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.05);
 
         .icons-links {
             display: flex;
             align-items: center;
-            gap: 13px;
+            gap: 15px;
 
-            img,
-            svg {
-                width: 50px;
-                height: 50px;
+            .icon-wrapper {
+                width: 55px;
+                height: 55px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 cursor: pointer;
-                border-radius: 7px;
+                border-radius: 12px;
                 transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                 position: relative;
+                overflow: hidden;
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+                    transform: translateX(-100%);
+                    transition: transform 0.6s;
+                }
 
                 &:hover {
-                    transform: scale(1.15) rotate(5deg);
-                    filter: brightness(1.2) drop-shadow(0 8px 16px rgba(0,0,0,0.3));
+                    transform: translateY(-8px) scale(1.1);
+                    box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 5px 15px rgba(0,0,0,0.2);
+                    border-color: rgba(255, 255, 255, 0.3);
+
+                    &::before {
+                        transform: translateX(100%);
+                    }
                 }
 
                 &:active {
-                    transform: scale(0.95);
+                    transform: translateY(-4px) scale(1.05);
                 }
-            }
 
-            svg {
-                padding: 6px;
+                &:nth-child(1) {
+                    background: linear-gradient(135deg, #333 0%, #000 100%);
+                    
+                    &:hover {
+                        background: linear-gradient(135deg, #444 0%, #111 100%);
+                        box-shadow: 0 15px 35px rgba(0,0,0,0.6), 0 0 20px rgba(255,255,255,0.1);
+                    }
+                }
 
                 &:nth-child(2) {
-                    background-color: #e19e00 !important;
+                    background: linear-gradient(135deg, #ff9500 0%, #e19e00 100%);
+                    
+                    &:hover {
+                        background: linear-gradient(135deg, #ffb84d 0%, #ff9500 100%);
+                        box-shadow: 0 15px 35px rgba(255, 149, 0, 0.4), 0 0 20px rgba(255, 149, 0, 0.3);
+                    }
                 }
 
                 &:nth-child(3) {
-                    background-color: #f33a3e !important;
+                    background: linear-gradient(135deg, #ff4757 0%, #f33a3e 100%);
+                    
+                    &:hover {
+                        background: linear-gradient(135deg, #ff6b7a 0%, #ff4757 100%);
+                        box-shadow: 0 15px 35px rgba(255, 71, 87, 0.4), 0 0 20px rgba(255, 71, 87, 0.3);
+                    }
                 }
 
-                &:nth-child(4),
-                &:nth-child(6) {
-                    background-color: #3282ff !important;
+                &:nth-child(4) {
+                    background: linear-gradient(135deg, #1db954 0%, #00db6e 100%);
+                    
+                    &:hover {
+                        background: linear-gradient(135deg, #1ed760 0%, #1db954 100%);
+                        box-shadow: 0 15px 35px rgba(29, 185, 84, 0.4), 0 0 20px rgba(29, 185, 84, 0.3);
+                    }
                 }
 
                 &:nth-child(5) {
-                    background-color: #00db6e !important;
+                    background: linear-gradient(135deg, #4285f4 0%, #3282ff 100%);
+                    
+                    &:hover {
+                        background: linear-gradient(135deg, #5a95f5 0%, #4285f4 100%);
+                        box-shadow: 0 15px 35px rgba(66, 133, 244, 0.4), 0 0 20px rgba(66, 133, 244, 0.3);
+                    }
+                }
+
+                img {
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 6px;
+                    transition: all 0.3s ease;
+                }
+
+                svg {
+                    width: 30px;
+                    height: 30px;
+                    color: white;
+                    transition: all 0.3s ease;
                 }
             }
         }
@@ -429,8 +492,30 @@ body {
     }
 
     .hero .links {
-        width: 90%;
-        top: -60px;
+        width: 95%;
+        max-width: 380px;
+        top: -80px;
+        padding: 12px;
+        height: 75px;
+    }
+
+    .hero .links .icons-links {
+        gap: 10px;
+    }
+
+    .hero .links .icons-links .icon-wrapper {
+        width: 50px;
+        height: 50px;
+    }
+
+    .hero .links .icons-links .icon-wrapper img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .hero .links .icons-links .icon-wrapper svg {
+        width: 25px;
+        height: 25px;
     }
 
     .div-project {
