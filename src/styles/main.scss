@@ -398,6 +398,29 @@ body {
                     border-radius: 5px;
                 }
 
+                /* Contact styles */
+                .contact-shell {
+                    width: 100%;
+                }
+                .contact-grid {
+                    gap: 18px;
+                }
+                .contact-form .label { color: #ccc; font-size: 13px; display:block; margin-top:12px }
+                .input { width:100%; padding:10px; margin-top:8px; border-radius:8px; border:1px solid #333; background:#0f0f10; color:#fff }
+                .input.textarea { min-height:120px; resize:vertical }
+                .btn-primary { background: linear-gradient(135deg,#667eea 0%,#764ba2 100%); color:#fff; padding:10px 14px; border-radius:8px; border:none; cursor:pointer }
+                .btn-primary.outline { background: transparent; border:1px solid #667eea; color:#fff }
+                .btn-ghost { background: transparent; border:1px solid #444; color:#ccc; padding:10px 12px; border-radius:8px; cursor:pointer }
+                .card { background:#1f1f22; padding:14px; border-radius:12px; border:1px solid #333 }
+                .muted { color:#aaa }
+                .social-pill { padding:8px 12px; border-radius:8px; background:#0f0f10; color:#fff; text-decoration:none }
+                .icon-btn { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:transparent; border:1px solid #333; color:#fff }
+                .toast { position:fixed; right:20px; bottom:20px; background:#222; color:#fff; padding:10px 14px; border-radius:8px; box-shadow:0 6px 20px rgba(0,0,0,0.4) }
+
+                @media (max-width: 880px) {
+                    .contact-grid { grid-template-columns: 1fr !important }
+                }
+
                 svg {
                     width: 28px;
                     height: 28px;

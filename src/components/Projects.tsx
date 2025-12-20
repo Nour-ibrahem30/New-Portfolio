@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { projectsData } from '../data/projects/projects'
 import Modal from './Modal'
+import OptimizedImage from './OptimizedImage'
 
 interface Project {
   name: string
@@ -95,13 +96,13 @@ const Projects = () => {
             onClick={() => setSelectedProject(project)}
           >
             <div style={{ width: '100%', height: 180, overflow: 'hidden', borderRadius: 8 }}>
-              <img
+              <OptimizedImage
                 src={getProjectImage(project.name)}
                 alt={project.name}
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).src = '/assets/images/_image.webp'
-                }}
+                className="project-thumb"
+                loading="lazy"
+                style={{ width: '100%', height: '100%' }}
+                fallback="/assets/images/_image.webp"
               />
             </div>
 
@@ -161,13 +162,12 @@ const Projects = () => {
           size="normal"
         >
           <div style={{padding: '20px', maxHeight: '500px', overflowY: 'auto'}}>
-            <img 
-              src={getProjectImage(selectedProject.name)} 
+            <OptimizedImage
+              src={getProjectImage(selectedProject.name)}
               alt={selectedProject.name}
-              style={{ width: '100%', height: '250px', objectFit: 'cover', borderRadius: '10px', marginBottom: '20px', boxShadow: '0 4px 15px rgba(0,0,0,0.3)' }}
-              onError={(e) => {
-                e.currentTarget.src = '/assets/images/_image.webp'
-              }}
+              loading="lazy"
+              style={{ width: '100%', height: '250px', borderRadius: '10px', marginBottom: '20px', boxShadow: '0 4px 15px rgba(0,0,0,0.3)' }}
+              fallback="/assets/images/_image.webp"
             />
             <div style={{marginBottom: '20px'}}>
               <h4 style={{color: 'white', marginBottom: '10px', fontSize: '20px'}}>{selectedProject.name}</h4>

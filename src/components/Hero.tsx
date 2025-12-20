@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Modal from "./Modal";
-import Projects from "./Projects";
+import { lazyLoadModal } from "../utils/lazyLoad";
+import OptimizedImage from "./OptimizedImage";
+import Contact from "./Contact";
 import {
   skillsData,
   experienceData,
@@ -13,6 +15,8 @@ import {
 
 const Hero = () => {
   const [activeModal, setActiveModal] = useState<string | null>(null);
+  const [lazyComponent, setLazyComponent] = useState<null | React.ComponentType<any>>(null);
+  const [lazyLoading, setLazyLoading] = useState(false);
   const [currentSection, setCurrentSection] = useState<string>("main");
   const [previousSection, setPreviousSection] = useState<string>("main");
 
@@ -21,6 +25,18 @@ const Hero = () => {
   }, []);
 
   const openModal = (type: string) => {
+    if (type === 'projects') {
+      setLazyLoading(true);
+      lazyLoadModal('projects')
+        .then((Comp) => {
+          if (Comp) setLazyComponent(() => Comp)
+        })
+        .finally(() => {
+          setLazyLoading(false)
+          setActiveModal(type)
+        })
+      return
+    }
     setActiveModal(type);
   };
 
@@ -50,68 +66,28 @@ const Hero = () => {
         >
           <div className="carousel-inner">
             <div className="carousel-item active">
-              <img
-                src="/assets/images/_image.webp"
-                className="d-block w-100"
-                alt="Image-Slider One"
-                loading="eager"
-              />
+              <OptimizedImage src="/assets/images/_image.webp" alt="Image-Slider One" className="d-block w-100" loading="eager" />
             </div>
             <div className="carousel-item">
-              <img
-                src="/assets/images/_image (2).webp"
-                className="d-block w-100"
-                alt="Image-Slider Two"
-                loading="lazy"
-              />
+              <OptimizedImage src="/assets/images/_image (2).webp" alt="Image-Slider Two" className="d-block w-100" loading="lazy" />
             </div>
             <div className="carousel-item">
-              <img
-                src="/assets/images/_image (3).webp"
-                className="d-block w-100"
-                alt="Image-Slider Three"
-                loading="lazy"
-              />
+              <OptimizedImage src="/assets/images/_image (3).webp" alt="Image-Slider Three" className="d-block w-100" loading="lazy" />
             </div>
             <div className="carousel-item">
-              <img
-                src="/assets/images/download (10).jfif"
-                className="d-block w-100"
-                alt="Image-Slider Four"
-                loading="lazy"
-              />
+              <OptimizedImage src="/assets/images/download (10).jfif" alt="Image-Slider Four" className="d-block w-100" loading="lazy" />
             </div>
             <div className="carousel-item">
-              <img
-                src="/assets/images/1370159.png"
-                className="d-block w-100"
-                alt="Image-Slider Five"
-                loading="lazy"
-              />
+              <OptimizedImage src="/assets/images/1370159.png" alt="Image-Slider Five" className="d-block w-100" loading="lazy" />
             </div>
             <div className="carousel-item">
-              <img
-                src="/assets/images/image(4).jpg"
-                className="d-block w-100"
-                alt="Image-Slider Six"
-                loading="lazy"
-              />
+              <OptimizedImage src="/assets/images/image(4).jpg" alt="Image-Slider Six" className="d-block w-100" loading="lazy" />
             </div>
             <div className="carousel-item">
-              <img
-                src="/assets/images/image(5).webp"
-                className="d-block w-100"
-                alt="Image-Slider Seven"
-                loading="lazy"
-              />
+              <OptimizedImage src="/assets/images/image(5).webp" alt="Image-Slider Seven" className="d-block w-100" loading="lazy" />
             </div>
             <div className="carousel-item">
-              <img
-                src="/assets/images/image(6).jpg"
-                className="d-block w-100"
-                alt="Image-Slider Eight"
-                loading="lazy"
-              />
+              <OptimizedImage src="/assets/images/image(6).jpg" alt="Image-Slider Eight" className="d-block w-100" loading="lazy" />
             </div>
           </div>
 
@@ -218,7 +194,10 @@ const Hero = () => {
         title="projects"
         size="big"
       >
-        <Projects />
+        {lazyLoading && <div style={{padding: 30}}>Loading projects...</div>}
+        {!lazyLoading && lazyComponent && (
+          <lazyComponent />
+        )}
       </Modal>
 
       <Modal
@@ -1651,147 +1630,7 @@ const Hero = () => {
         onClose={closeModal}
         title="Contact Me"
       >
-        <div
-          style={{
-            padding: "40px 30px",
-            textAlign: "center",
-            background: "linear-gradient(135deg, #1a1a1d 0%, #2b2b2e 100%)",
-          }}
-        >
-          <h3
-            style={{ color: "white", marginBottom: "30px", fontSize: "24px" }}
-          >
-            Let's Connect
-          </h3>
-
-          <div
-            style={{
-              background: "#1f1f22",
-              padding: "25px",
-              borderRadius: "12px",
-              marginBottom: "20px",
-              border: "1px solid #333",
-              transition: "transform 0.2s",
-              cursor: "pointer",
-            }}
-          >
-            <i
-              className="fa-solid fa-envelope"
-              style={{
-                fontSize: "32px",
-                color: "#007acc",
-                marginBottom: "15px",
-                display: "block",
-              }}
-            ></i>
-            <p style={{ color: "#aaa", fontSize: "14px", marginBottom: "8px" }}>
-              Email
-            </p>
-            <p
-              style={{
-                color: "#fff",
-                fontSize: "16px",
-                marginBottom: "15px",
-                fontWeight: "500",
-              }}
-            >
-              {contactData.email}
-            </p>
-            <button
-              onClick={() => window.open(`mailto:${contactData.email}`)}
-              style={{
-                background: "linear-gradient(135deg, #007acc 0%, #005a9e 100%)",
-                color: "white",
-                padding: "12px 30px",
-                borderRadius: "8px",
-                border: "none",
-                cursor: "pointer",
-                fontSize: "15px",
-                fontWeight: "bold",
-                boxShadow: "0 4px 15px rgba(0, 122, 204, 0.3)",
-                transition: "all 0.3s",
-              }}
-              onMouseOver={(e) =>
-                (e.currentTarget.style.transform = "translateY(-2px)")
-              }
-              onMouseOut={(e) =>
-                (e.currentTarget.style.transform = "translateY(0)")
-              }
-            >
-              <i
-                className="fa-solid fa-paper-plane"
-                style={{ marginRight: "8px" }}
-              ></i>
-              Send Email
-            </button>
-          </div>
-
-          <div
-            style={{
-              background: "#1f1f22",
-              padding: "25px",
-              borderRadius: "12px",
-              border: "1px solid #333",
-              transition: "transform 0.2s",
-              cursor: "pointer",
-            }}
-          >
-            <i
-              className="fa-brands fa-whatsapp"
-              style={{
-                fontSize: "32px",
-                color: "#25D366",
-                marginBottom: "15px",
-                display: "block",
-              }}
-            ></i>
-            <p style={{ color: "#aaa", fontSize: "14px", marginBottom: "8px" }}>
-              WhatsApp
-            </p>
-            <p
-              style={{
-                color: "#fff",
-                fontSize: "16px",
-                marginBottom: "15px",
-                fontWeight: "500",
-              }}
-            >
-              {contactData.phone}
-            </p>
-            <button
-              onClick={() =>
-                window.open(
-                  `https://wa.me/${contactData.phone.replace(/[^0-9]/g, "")}`,
-                  "_blank"
-                )
-              }
-              style={{
-                background: "linear-gradient(135deg, #25D366 0%, #128C7E 100%)",
-                color: "white",
-                padding: "12px 30px",
-                borderRadius: "8px",
-                border: "none",
-                cursor: "pointer",
-                fontSize: "15px",
-                fontWeight: "bold",
-                boxShadow: "0 4px 15px rgba(37, 211, 102, 0.3)",
-                transition: "all 0.3s",
-              }}
-              onMouseOver={(e) =>
-                (e.currentTarget.style.transform = "translateY(-2px)")
-              }
-              onMouseOut={(e) =>
-                (e.currentTarget.style.transform = "translateY(0)")
-              }
-            >
-              <i
-                className="fa-brands fa-whatsapp"
-                style={{ marginRight: "8px" }}
-              ></i>
-              Chat on WhatsApp
-            </button>
-          </div>
-        </div>
+        <Contact />
       </Modal>
     </>
   );
