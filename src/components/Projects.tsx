@@ -95,48 +95,53 @@ const Projects = () => {
   }
 
   return (
-    <>
+    <div>
       <div style={{padding: '20px', background: 'linear-gradient(135deg, #1a1a1d 0%, #2b2b2e 100%)', minHeight: '100%'}}>
         {loading && <div style={{color: '#ccc', marginBottom: 12}}>Loading repositories...</div>}
         {apiError && <div style={{color: '#ffb4b4', marginBottom: 12}}>GitHub API: {apiError} — showing local projects.</div>}
-        <input
-          type="text"
-          className="projects-search"
-          placeholder="🔍 Search projects..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          style={{
-            width: '100%',
-            padding: '12px 20px',
-            marginBottom: '20px',
-            borderRadius: '10px',
-            border: '1px solid #333',
-            background: '#1f1f22',
-            color: 'white',
-            fontSize: '14px',
-            outline: 'none',
-            transition: 'all 0.3s'
-          }}
-          onFocus={(e) => {
-            e.currentTarget.style.borderColor = '#667eea'
-            e.currentTarget.style.boxShadow = '0 0 0 3px rgba(102, 126, 234, 0.2)'
-          }}
-          onBlur={(e) => {
-            e.currentTarget.style.borderColor = '#333'
-            e.currentTarget.style.boxShadow = 'none'
-          }}
-        />
-        <div
-          className="parent-project"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: '18px',
-            width: '100%',
-            boxSizing: 'border-box',
-          }}
-        >
-        {filteredProjects.map((project, index) => (
+
+        <div className="parent-Api">
+          <input
+            type="text"
+            className="projects-search"
+            placeholder="🔍 Search projects..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '12px 20px',
+              marginBottom: '20px',
+              borderRadius: '10px',
+              border: '1px solid #333',
+              background: '#1f1f22',
+              color: 'white',
+              fontSize: '14px',
+              outline: 'none',
+              transition: 'all 0.3s'
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = '#667eea'
+              e.currentTarget.style.boxShadow = '0 0 0 3px rgba(102, 126, 234, 0.2)'
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = '#333'
+              e.currentTarget.style.boxShadow = 'none'
+            }}
+          />
+
+          <div
+            className="parent-project"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gap: '18px',
+              width: '100%',
+              boxSizing: 'border-box',
+            }}
+          >
+          {filteredProjects.length === 0 && !loading ? (
+            <div style={{ color: '#bbb', padding: 20 }}>No projects found.</div>
+          ) : filteredProjects.map((project, index) => (
           <div
             key={project.name || index}
             className="div-project"
@@ -307,7 +312,7 @@ const Projects = () => {
           </div>
         </Modal>
       )}
-    </>
+    </div>
   )
 }
 
