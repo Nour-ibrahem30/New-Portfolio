@@ -15,16 +15,75 @@ const Projects = () => {
   const [projects, setProjects] = useState<Project[]>([])
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [apiError, setApiError] = useState<string | null>(null)
 
   const getProjectData = (projectName: string) => {
     return projectsData[projectName] || null
   }
 
   useEffect(() => {
+    let mounted = true
+    setLoading(true)
+    setApiError(null)
+
     fetch('https://api.github.com/users/Nour-ibrahem30/repos')
-      .then(response => response.json())
-      .then(data => setProjects(data))
-      .catch(error => console.error('Error:', error))
+      .then(async (response) => {
+        const data = await response.json().catch(() => null)
+        if (!response.ok) {
+          const msg = data && data.message ? data.message : response.statusText
+          throw new Error(msg || 'GitHub API error')
+        }
+        return data
+      })
+      .then((data) => {
+        if (!mounted) return
+        if (Array.isArray(data)) {
+          setProjects(data)
+        } else if (data && (data as any).message) {
+          // API returned an error message (rate limit, etc.) — use fallback
+          setApiError((data as any).message)
+          const fallback = Object.values(projectsData).map((p) => ({
+            name: p.name,
+            description: p.description,
+            html_url: '#',
+            language: p.technologies?.[0] || '',
+            homepage: undefined,
+          }))
+          setProjects(fallback)
+        } else {
+          // unknown shape — use local fallback
+          const fallback = Object.values(projectsData).map((p) => ({
+            name: p.name,
+            description: p.description,
+            html_url: '#',
+            language: p.technologies?.[0] || '',
+            homepage: undefined,
+          }))
+          setProjects(fallback)
+        }
+      })
+      .catch((error) => {
+        if (!mounted) return
+        console.error('GitHub API error:', error)
+        setApiError(error.message || 'Failed to fetch GitHub repositories')
+        const fallback = Object.values(projectsData).map((p) => ({
+          name: p.name,
+          description: p.description,
+          html_url: '#',
+          language: p.technologies?.[0] || '',
+          homepage: undefined,
+        }))
+        setProjects(fallback)
+      })
+      .finally(() => {
+        if (!mounted) return
+        setLoading(false)
+      })
+
+    return () => {
+      mounted = false
+    }
   }, [])
 
   const filteredProjects = projects.filter(project =>
@@ -38,6 +97,8 @@ const Projects = () => {
   return (
     <>
       <div style={{padding: '20px', background: 'linear-gradient(135deg, #1a1a1d 0%, #2b2b2e 100%)', minHeight: '100%'}}>
+        {loading && <div style={{color: '#ccc', marginBottom: 12}}>Loading repositories...</div>}
+        {apiError && <div style={{color: '#ffb4b4', marginBottom: 12}}>GitHub API: {apiError} — showing local projects.</div>}
         <input
           type="text"
           className="projects-search"
